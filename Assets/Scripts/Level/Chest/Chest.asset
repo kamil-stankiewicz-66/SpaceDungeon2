@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8356bf260d876ee4eb6eb8a010ef9b3b, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  closed: {fileID: 21300000, guid: edb7dd186281bdb4ea7486ad4b1dd20c, type: 3}
+  openFull: {fileID: 21300000, guid: 6f992189e8aacb74cba924903fd71d9e, type: 3}
+  openEmpty: {fileID: 21300000, guid: 34945d644f4db42488f7e7eb68e1e773, type: 3}

@@ -9,6 +9,9 @@ public class SOPlayerData : ScriptableObject
     int weaponID;
     int coins;
 
+
+    //get and set
+
     public int Exp
     {
         get => exp;
@@ -27,6 +30,9 @@ public class SOPlayerData : ScriptableObject
         set => coins = value;
     }
 
+
+    //only get
+
     public int ExpLevel
     {
         get => 1 + Exp / so_parameters.PLAYER_EXP2PROMOTION;
@@ -40,5 +46,13 @@ public class SOPlayerData : ScriptableObject
     public int Damage
     {
         get => ExpLevel;
+    }
+}
+
+public static class SOPlayerDataExtensions
+{
+    public static void AddExp(this SOPlayerData data, int exp)
+    {
+        data.Exp += exp;
     }
 }

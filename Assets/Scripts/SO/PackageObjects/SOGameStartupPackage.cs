@@ -1,10 +1,14 @@
+using Unity.Collections;
 using UnityEngine;
+
+public enum EGameRunMode { Start, Continue, Maxing }
 
 [CreateAssetMenu(fileName = "SOGameStartupPackage", menuName = "ScriptableObjects/PackageObjects/SOGameStartupPackage")]
 public class SOGameStartupPackage : ScriptableObject
 {
-    int m_chapter = -1;
-    int m_level = -1;
+    [SerializeField] int m_chapter;
+    [SerializeField] int m_level;
+    [SerializeField] EGameRunMode runMode;
 
     public int Chapter
     {
@@ -16,5 +20,11 @@ public class SOGameStartupPackage : ScriptableObject
     {
         get => m_level;
         set => m_level = value;
+    }
+
+    public EGameRunMode RunMode
+    {
+        get => runMode;
+        set => runMode = value;
     }
 }

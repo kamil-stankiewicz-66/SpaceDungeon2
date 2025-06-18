@@ -1,0 +1,4 @@
+public class GameNotificationCaller : SystemLogCaller
+{
+    
+}

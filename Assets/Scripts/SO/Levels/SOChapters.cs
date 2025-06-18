@@ -5,10 +5,10 @@ public class SOChapters : ScriptableObject
 {
     [SerializeField] SOChapter[] chapters;
 
-    public SOChapter[] Get => chapters;
-
     public int Size
     {
         get => chapters.Length;
     }
+
+    public SOChapter Get(int index) => chapters.Get(index);
 }

@@ -23,7 +23,7 @@ public class ChapterButton : MonoBehaviour
         this.chapterID = chapterID;
 
         title.text = $"Chapter {(chapterID+1).ToRomanNum()}";
-        subTitle.text = SO_chapters.Get[chapterID].Title;
+        subTitle.text = SO_chapters.Get(chapterID).Title;
     }
 
     public void Click()
