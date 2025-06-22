@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SOLevel_01_001
   m_EditorClassIdentifier: 
   levelHolder: {fileID: 3996462801943153107, guid: e4eef7daa26ddd449b101526a619a4e7, type: 3}
-  state: 2
+  state: 1

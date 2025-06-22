@@ -6,7 +6,7 @@ public class KillAllEnemies : StoryActivity
 
     protected override bool ActivityPassingCondition()
     {
-        return levelData.EnemiesAll - levelData.EnemiesKilled == 0;
+        return levelData.EnemiesCount - levelData.EnemiesKilled == 0;
     }
 
     internal override string TaskContents()

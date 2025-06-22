@@ -6,7 +6,7 @@ public class WindowHome : MonoBehaviour, IWindow
 {
     //so
     [SerializeField] SOPlayerData SO_playerData;
-    [SerializeField] SOParameters SO_parametars;
+    [SerializeField] SOParameters SO_parameters;
 
     //stats bar
     [SerializeField] TextMeshProUGUI text_maxHealth;
@@ -45,8 +45,8 @@ public class WindowHome : MonoBehaviour, IWindow
 
         //level bar
         text_level.text = $"{levelOriginal} {SO_playerData.ExpLevel}";
-        slider_expPoints.maxValue = 100;
-        slider_expPoints.value = 100 - Mathf.Abs(SO_playerData.Exp - SO_parametars.PLAYER_EXP2PROMOTION);
+        slider_expPoints.maxValue = SO_parameters.PLAYER_EXP2PROMOTION;
+        slider_expPoints.value = SO_playerData.Exp - ((SO_playerData.ExpLevel -1) * SO_parameters.PLAYER_EXP2PROMOTION);
         text_expPoints.text = SO_playerData.Exp.ToString();
 
         //continue bar

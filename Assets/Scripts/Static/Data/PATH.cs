@@ -1,48 +1,52 @@
-﻿using System.IO;
+﻿using System.Linq;
 using UnityEngine;
+using io = System.IO;
 
 public static class PATH
 {
     //main
-    public static string gameFolder = Application.persistentDataPath;
-    private const string ext = "save";
+    static string gameFolder = Application.persistentDataPath;
+    const string ext = "save";
 
 
-    /// <summary>
-    /// only get
-    /// </summary>
+    public const string PLAYERDATA_FILE = "playerdata";
+    public const string WEAPONSBASE_FILE = "weaponsdata";
+    public const string LEVELRUNMODE_FILE = "levelrunmode";
 
-    public static string PLAYERDATA_FILE
+    public static string LEVELS_FOLDER = "levels";
+    public static string LEVELS_PLAYERDATA_FILE = "player";
+    public static string LEVELS_STORYACTIVITY_FOLDER = "story";
+    public static string LEVELS_ENEMIES_FOLDER = "enemies";
+    public static string LEVELS_CHESTS_FOLDER = "chests";
+    public static string LEVELS_META_FILE = "meta";
+
+
+    //func
+
+    public static string GetDirectory(string file)
     {
-        get => CreatePath(gameFolder, "player");
+        return CreatePath(gameFolder, file);
     }
 
-    public static string WEAPONSBASE_FILE
+    public static string GetDirectory(string[] path)
     {
-        get => CreatePath(gameFolder, "weaponsdata");
+        string directory = gameFolder;
+        for (int i = 0; i < path.Length-1; i++)
+        {
+            directory = io.Path.Combine(directory, path[i]);
+        }
+
+        return CreatePath(directory, path.Last());
     }
 
-    public static string LEVELRUNMODE_FILE
+
+    //helpers
+
+    static string CreatePath(string path, string fileName)
     {
-        get => CreatePath(LEVELS_FOLDER, "levelrunmode");
-    }
-    
+        if (!io.Directory.Exists(path))
+            io.Directory.CreateDirectory(path);
 
-
-    /// <summary>
-    /// functions
-    /// </summary>
-
-    private static string LEVELS_FOLDER
-    {
-        get => Path.Combine(gameFolder, "levels");
-    }
-
-    private static string CreatePath(string path, string fileName)
-    {
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-
-        return Path.Combine(path, $"{fileName}.{ext}");
+        return io.Path.Combine(path, $"{fileName}.{ext}");
     }
 }

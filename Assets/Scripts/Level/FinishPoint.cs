@@ -6,10 +6,13 @@ public class FinishPoint : MonoBehaviour
     private LevelFinalScreen levelFinalScreen;
     private bool m_trigger_used;
 
-    private void Start()
+    private void Awake()
     {
-        levelData = GetComponentInParent<LevelData>();
-        levelFinalScreen = FindFirstObjectByType<LevelFinalScreen>().GetComponent<LevelFinalScreen>();
+        levelData = FindAnyObjectByType<LevelData>();
+        levelFinalScreen = FindAnyObjectByType<LevelFinalScreen>();
+
+        if (levelData == null) Debug.LogError("FINISH_POINT :: level data not found");
+        if (levelFinalScreen == null) Debug.LogError("FINISH_POINT :: level final screen not found");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +34,7 @@ public class FinishPoint : MonoBehaviour
             return;
         
         m_trigger_used = true;
+
         //complete level
         levelFinalScreen?.ShowWindow(LevelFinalScreen.FinalScreenModeEnum.LevelCompleted);
         print("FinishPoint: lvl complete");

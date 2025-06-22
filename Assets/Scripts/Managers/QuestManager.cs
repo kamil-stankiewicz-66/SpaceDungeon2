@@ -8,15 +8,14 @@ public class QuestManager : MonoBehaviour
     [SerializeField] SystemLogCaller systemLogCaller;
     private Animator animator;
 
-    private Dictionary<ushort, GameObject> questMarks;
-    float exitAnimLenght;
+    private Dictionary<int, GameObject> questMarks;
 
 
     /// <summary>
     /// public methods
     /// </summary>
 
-    public void CreateNewQuestMark(ushort quest_id, StoryActivity storyActivity)
+    public void CreateNewQuestMark(int quest_id, StoryActivity storyActivity)
     {
         if (questMarks.ContainsKey(quest_id))
             return;
@@ -26,7 +25,7 @@ public class QuestManager : MonoBehaviour
         questMarks.Add(quest_id, _newQuestMark);
     }
 
-    public void DeleteQuestMark(ushort quest_id)
+    public void DeleteQuestMark(int quest_id)
     {
         if (questMarks.TryGetValue(quest_id, out GameObject _questMark))
         {
@@ -47,7 +46,7 @@ public class QuestManager : MonoBehaviour
     
     private void Awake()
     {
-        questMarks = new Dictionary<ushort, GameObject>();
+        questMarks = new Dictionary<int, GameObject>();
     }
 
     private void OnDestroy()

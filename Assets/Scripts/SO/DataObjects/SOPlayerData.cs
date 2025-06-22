@@ -5,9 +5,12 @@ public class SOPlayerData : ScriptableObject
 {
     [SerializeField] SOParameters so_parameters;
 
-    int exp;
-    int weaponID;
-    int coins;
+    [SerializeField] int exp;
+    [SerializeField] int weaponID;
+    [SerializeField] int coins;
+
+
+    public bool IsLoaded { get; set; }
 
 
     //get and set
@@ -35,7 +38,7 @@ public class SOPlayerData : ScriptableObject
 
     public int ExpLevel
     {
-        get => 1 + Exp / so_parameters.PLAYER_EXP2PROMOTION;
+        get => 1 + (Exp / so_parameters.PLAYER_EXP2PROMOTION);
     }
 
     public int Health
@@ -46,6 +49,17 @@ public class SOPlayerData : ScriptableObject
     public int Damage
     {
         get => ExpLevel;
+    }
+
+
+    //set default
+
+    public void SetDefault()
+    {
+        exp = 0;
+        weaponID = -1;
+        coins = 0;
+        IsLoaded = false;
     }
 }
 

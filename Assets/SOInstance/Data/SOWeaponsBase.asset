@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: SOWeaponsBase
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 6289147585991090194, guid: 0f6028dedda46f84d9dfcb68cdd18364, type: 3}
-  isLoaded: 0
+  - {fileID: 1296633490770606646, guid: cef576a48abfcdf49844d93227d4bafb, type: 3}

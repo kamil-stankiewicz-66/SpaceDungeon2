@@ -17,59 +17,6 @@ public static class TransformExtensions
 
     }
 
-    public static void Aim(this Transform entityBody, ref Transform weaponHolder, Transform target, ref bool isFacingRight)
-    {
-        if (target == null)
-        {
-            weaponHolder.localEulerAngles = Vector2.zero;
-            return;
-        }
-
-        entityBody.TurnAround(entityBody.DirectionTo(target), ref isFacingRight);
-        Vector3 aimAngle = weaponHolder.AimRotationToTarget(target, isFacingRight);
-        weaponHolder.eulerAngles = aimAngle;
-
-    }
-
-    public static Transform FindNearestTarget(this Transform entity, List<Transform> targets, LayerMask colliderLayer)
-    {
-        if (targets == null)
-            return null;
-
-        Transform nearestTarget = null;
-        List<Transform> inVisionTargets = new List<Transform>(targets.Where(target => !entity.IsRycastHit(target, colliderLayer)));
-
-        foreach (var target in inVisionTargets)
-        {
-            if (entity.DistanceToSqr(target) > entity.DistanceToSqr(nearestTarget ?? target))
-                continue;
-
-            nearestTarget = target;
-
-        }
-
-        return nearestTarget;
-    }
-
-    public static void Move(this Transform entity, Vector2 direction, float speed)
-    {
-        entity.Translate(direction * speed);
-
-    }
-
-    public static void MoveFixed(this Transform entity, Vector2 direction, float speed)
-    {
-        Vector2 fix = new Vector2(Mathf.Abs(direction.x), direction.y);
-        entity.Translate(fix * speed);
-
-    }
-
-    public static void MoveNormalized(this Transform entity, Vector2 direction, float speed)
-    {
-        entity.Translate(direction.normalized * speed);
-
-    }
-
     public static HashSet<Transform> GetAllChildsT(this Transform parent)
     {
         HashSet<Transform> childs = new HashSet<Transform>();
@@ -89,20 +36,7 @@ public static class TransformExtensions
         return childs;
     }
 
-    public static List<GameObject> GetChilds(this Transform parent)
-    {
-        List<GameObject> childs = new List<GameObject>();
-
-        for (int i = 0; i < parent.childCount; i++)
-        {
-            GameObject _child = parent.GetChild(i).gameObject;
-            childs.Add(_child);
-        }
-
-        return childs;
-    }
-
-    public static void KillAllChilds(this Transform parent)
+    public static void DestroyAllChilds(this Transform parent)
     {
         int _weaponHolderChildCount = parent.childCount;
 
@@ -110,10 +44,13 @@ public static class TransformExtensions
         {
             for (int i = 0; i < _weaponHolderChildCount; i++)
             {
-                Object.Destroy(parent.GetChild(i).gameObject);
+                UnityEngine.Object.Destroy(parent.GetChild(i).gameObject);
             }
         }
     }
+
+    public static float DistanceTo(this Transform entity, Transform target) => (target.position - entity.position).magnitude;
+
 }
 
 public static class GameObjectExtensions
@@ -170,22 +107,32 @@ public static class AnimatorExtensions
         currentAnimation = newAnimation;
         animator.CrossFade(newAnimation, duration);
     }
+
+    public static float AnimationClipTime(this Animator animator, string animName)
+    {
+        float t = 0;
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips.Where(clip => clip.name == animName))
+            t = clip.length;
+        return t;
+    }
 }
 
 public static class ImageExtensions
 {
-    public static void RefreshSlider(this Image image, float hp, float hp_max)
+    public static void RefreshSlider(this Image image, float value, float max)
     {
         if (image == null)
-            return;
-
-        if (hp_max == 0)
         {
-            Debug.Log($"{image.gameObject.name}: health system: slider; health_max == 0");
             return;
         }
 
-        image.fillAmount = hp / hp_max;
+        if (max == 0)
+        {
+            Debug.LogWarning($"{image.gameObject.name} :: slider; max is 0");
+            return;
+        }
+
+        image.fillAmount = value / max;
     }
 }
 
@@ -263,6 +210,29 @@ public static class TemplateExtensions
         }
 
         return array[index];
+    }
+
+    public static T Get<T>(this List<T> list, int index)
+    {
+        if (list == null)
+        {
+            Debug.LogWarning("EXTENSIONS :: GET<T> :: list is null");
+            return default;
+        }
+
+        if (list.Count == 0)
+        {
+            Debug.LogWarning("EXTENSIONS :: GET<T> :: list is empty");
+            return default;
+        }
+
+        if (index < 0 || list.Count <= index)
+        {
+            Debug.LogWarning("EXTENSIONS :: GET<T> :: index is out of range " + index);
+            return default;
+        }
+
+        return list[index];
     }
 
     /// <summary>

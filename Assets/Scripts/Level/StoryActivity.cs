@@ -2,38 +2,32 @@ using UnityEngine;
 public abstract class StoryActivity : MonoBehaviour
 {
     private QuestManager questManager;
-    private bool _activityCompleted;
-    private ushort _quest_id;
+    private bool isCompleted;
+    private int questID;
 
     
-    /// <summary>
-    /// get and set
-    /// </summary>
+    //get and set
 
-    public bool IsActivityCompleted
+    public bool IsCompleted
     {
-        get => _activityCompleted;
-        set => _activityCompleted = value;
+        get => isCompleted;
+        set => isCompleted = value;
     }
 
-    public ushort Quest_id
+    public int QuestID
     {
-        get => _quest_id;
-        set => _quest_id = value;
+        get => questID;
+        set => questID = value;
     }
 
 
-    /// <summary>
-    /// abstract methods
-    /// </summary>
+    //abstract methods
 
     internal abstract string TaskContents();
     protected abstract bool ActivityPassingCondition();
 
 
-    /// <summary>
-    /// private methods
-    /// </summary>
+    //private methods
 
     protected void OnEnable()
     {
@@ -42,13 +36,13 @@ public abstract class StoryActivity : MonoBehaviour
 
     protected void Update()
     {
-        if (_activityCompleted)
+        if (isCompleted)
             return;
 
         if (ActivityPassingCondition())
         {
-            _activityCompleted = true;
-            if (questManager != null) questManager.DeleteQuestMark(_quest_id);
+            isCompleted = true;
+            if (questManager != null) questManager.DeleteQuestMark(questID);
             else Debug.LogWarning($"{gameObject.name} questManager == null");
         }
     }

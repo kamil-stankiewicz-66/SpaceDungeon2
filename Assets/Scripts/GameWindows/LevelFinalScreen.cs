@@ -4,12 +4,12 @@ using TMPro;
 
 public class LevelFinalScreen : MonoBehaviour
 {
+    [SerializeField] LevelManager levelManager;
     [SerializeField] LevelSaver levelSaver;
-    [SerializeField] ExpManager expManager;
 
     [SerializeField] SOPlayerData SO_playerData;
     [SerializeField] SOGameStartupPackage SO_GameStartupPackage;
-    [SerializeField] SOChapters SO_Chapters;
+    [SerializeField] SOChaptersBase SO_Chapters;
 
     [SerializeField] Transform levelHolder;
 
@@ -32,9 +32,7 @@ public class LevelFinalScreen : MonoBehaviour
     private bool isUsed;
 
 
-    /// <summary>
-    /// public
-    /// </summary>
+    //public
 
     public enum FinalScreenModeEnum
     {
@@ -48,7 +46,7 @@ public class LevelFinalScreen : MonoBehaviour
             return;
 
         isUsed = true;
-        GameMarks.TurnAllOff();
+        GameMarks.SetAll(false);
         parentHolder.SetActive(true);
         StartCoroutine(LoadWindow(_finalScreenMode));
         print("LevelFinalScreen: Final cor started");
@@ -60,9 +58,7 @@ public class LevelFinalScreen : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// privs
-    /// </summary>
+    //privs
     
     private IEnumerator LoadWindow(FinalScreenModeEnum _finalScreenMode)
     {
@@ -74,11 +70,11 @@ public class LevelFinalScreen : MonoBehaviour
         if (levelData == null)
             levelData = levelHolder.GetComponentInChildren<LevelData>();
 
-        text_storyActivitiesCompleted.text = $"{levelData.StoryActivitiesCompleted}/{levelData.StoryActivitiesAll}";
-        text_enemiesKilled.text = $"{levelData.EnemiesKilledFixed}/{levelData.EnemiesAll}";
-        text_chestLooted.text = $"{levelData.ChestsLooted}/{levelData.ChestsAll}";
+        text_storyActivitiesCompleted.text = $"{levelData.StoryActivitiesCompleted}/{levelData.StoryActivitiesCount}";
+        text_enemiesKilled.text = $"{levelData.EnemiesKilledFixed}/{levelData.EnemiesCount}";
+        text_chestLooted.text = $"{levelData.ChestsLooted}/{levelData.ChestsCount}";
 
-        expForLevel = expManager.ExpForLevel();
+        expForLevel = levelManager.CountExp();
         text_expInfo.text = $"+{expForLevel}";
 
         switch (_finalScreenMode)

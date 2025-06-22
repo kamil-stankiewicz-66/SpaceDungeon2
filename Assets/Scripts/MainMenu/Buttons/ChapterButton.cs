@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ChapterButton : MonoBehaviour
 {
-    [SerializeField] SOChapters SO_chapters;
+    [SerializeField] SOChaptersBase SO_chapters;
     [SerializeField] SOGameStartupPackage SO_gameStartupPackage;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI subTitle;

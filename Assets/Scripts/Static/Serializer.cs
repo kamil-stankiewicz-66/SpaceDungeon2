@@ -13,7 +13,7 @@ public static class Serializer
 
         if (!File.Exists(filePath))
         {
-            Debug.Log("LoadJson: Plik nie istnieje: " + filePath);
+            Debug.Log("LoadJson: File does not exist: " + filePath);
             return false;
         }
 
@@ -27,12 +27,12 @@ public static class Serializer
             }
             else
             {
-                Debug.Log("LoadJson: Nie można załadować obiektu do żądanego typu.");
+                Debug.Log("LoadJson: Could not load object into requested type.");
             }
         }
         catch (Exception e)
         {
-            Debug.LogError("LoadJson: Błąd podczas deserializacji: " + e.Message);
+            Debug.LogError("LoadJson: Error while deserializing: " + e.Message);
         }
         
 
@@ -46,7 +46,7 @@ public static class Serializer
 
         if (!File.Exists(filePath))
         {
-            Debug.Log("LoadBin: Plik nie istnieje: " + filePath);
+            Debug.Log("LoadBin: File does not exist: " + filePath);
             return false;
         }
 
@@ -63,12 +63,12 @@ public static class Serializer
                 }
                 else
                 {
-                    Debug.Log("LoadBin: Nie można załadować obiektu do żądanego typu.");
+                    Debug.Log("LoadBin: Could not load object into requested type.");
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError("LoadBin: Błąd podczas deserializacji: " + e.Message);
+                Debug.LogError("LoadBin: Error while deserializing: " + e.Message);
             }
         }
 

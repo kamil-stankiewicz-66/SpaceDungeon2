@@ -15,20 +15,24 @@ public class ItemStoreIcon : MonoBehaviour
     ColorBlock clicked_colorBlock;
     bool isClicked;
 
-    UnityAction<short> unityAction;
-    short id;
+    UnityAction<int> unityAction;
+    int id;
 
-    /// <summary>
-    /// public
-    /// </summary>
+    //public
 
     internal void Set(Sprite _icon,
                           string _name,
                           bool _visible,
-                          short _id,
-                          UnityAction<short> _unityAction)
+                          int _id,
+                          UnityAction<int> _unityAction)
     {
         icon.sprite = _icon;
+        
+        if (icon.sprite == null)
+        {
+            icon.color = new Color(255, 255, 255, 0);
+        }
+
         text_weaponName.text = _name;
         id = _id;
 
@@ -68,9 +72,7 @@ public class ItemStoreIcon : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// unuty caller
-    /// </summary>
+    //unity caller
 
     private void OnEnable()
     {

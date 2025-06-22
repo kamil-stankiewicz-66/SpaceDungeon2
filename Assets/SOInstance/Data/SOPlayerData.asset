@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: SOPlayerData
   m_EditorClassIdentifier: 
   so_parameters: {fileID: 11400000, guid: fb9182ce9edfeed4bb8e0e5122f34ada, type: 2}
+  exp: 0
+  weaponID: -1
+  coins: 0

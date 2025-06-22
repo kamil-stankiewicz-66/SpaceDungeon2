@@ -12,5 +12,6 @@ public class DDOLSIObject : MonoBehaviour
         }
 
         instance = gameObject;
+        DontDestroyOnLoad(instance);
     }
 }

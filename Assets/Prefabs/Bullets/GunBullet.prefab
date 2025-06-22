@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9194182932480607583}
-  - component: {fileID: 2352284857692022485}
+  - component: {fileID: 8329633256592918454}
   - component: {fileID: 5997823098521797418}
   - component: {fileID: 2032759077400116936}
   - component: {fileID: 4469020136018195504}
@@ -30,12 +30,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.28, y: 0.17, z: 0.34}
+  m_LocalScale: {x: 0.22, y: 0.11, z: 0.34}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2352284857692022485
+--- !u!114 &8329633256592918454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,18 +44,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4860620285133736508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16055eba10bfbf940866fde9b0d5f5d9, type: 3}
+  m_Script: {fileID: 11500000, guid: a5e7ced0fcb56264daf2f0e500fbba00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 5997823098521797418}
-  bulletTag: 
   bulletDamage: 0
-  bulletSpeed: 20
+  bulletSpeed: 50
   particleEffect: {fileID: 6984896995991402233, guid: 90a553023568397428a027fd8d9961d6, type: 3}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!50 &5997823098521797418
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -65,9 +62,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -76,9 +73,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &2032759077400116936
 CapsuleCollider2D:
@@ -88,6 +85,7 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4860620285133736508}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -109,9 +107,10 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0.05, y: 0}
   m_Size: {x: 2.41, y: 0.67}
   m_Direction: 1
@@ -132,6 +131,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

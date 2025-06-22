@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WindowChapters : MonoBehaviour, IWindow
 {
-    [SerializeField] SOChapters SO_chapters;
+    [SerializeField] SOChaptersBase SO_chapters;
     [SerializeField] GameObject chapterButtonPrefab;
     [SerializeField] Transform container;
 

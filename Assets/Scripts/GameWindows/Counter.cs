@@ -10,9 +10,7 @@ public class Counter : MonoBehaviour
     bool isCounting;
 
 
-    /// <summary>
-    /// public
-    /// </summary>
+    //public
 
     public void Call(
         ushort timeInSeconds,
@@ -21,15 +19,15 @@ public class Counter : MonoBehaviour
         UnityAction afterCountingAction = null)
     {
         if (isCounting)
+        {
             return;
+        }
 
         StartCoroutine(Count(timeInSeconds, timeScaleAfter, beforeCountingAction, afterCountingAction));
     }
 
 
-    /// <summary>
-    /// private
-    /// </summary>
+    //private
 
     private IEnumerator Count(
         ushort time,
@@ -42,10 +40,13 @@ public class Counter : MonoBehaviour
         beforeCountingAction?.Invoke();
 
         //before
-        GameMarks.TurnAllOff();
+        GameMarks.SetAll(false);
         float _timeBefore = Time.timeScale;
+
         if (Time.timeScale > 0.0f)
+        {
             Time.timeScale = 0.0f;
+        }
 
         //count
         for (int i = time; i > 0; i--)
@@ -58,7 +59,7 @@ public class Counter : MonoBehaviour
         Time.timeScale 
             = _timeScaleAfter 
             ?? _timeBefore;
-        GameMarks.TurnAllOn();
+        GameMarks.SetAll(true);
 
         counterHolder.SetActive(false);
         afterCountingAction?.Invoke();

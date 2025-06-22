@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class LAYER
 {
-    public static LayerMask COLLIDER = LayerMask.GetMask("Collider");
+    public static LayerMask RaycastWall = LayerMask.GetMask("RaycastWall");
+    public static LayerMask TakeDamage = LayerMask.GetMask("TakeDamage");
 }

@@ -7,7 +7,7 @@ public class WindowLevels : MonoBehaviour
 {
     [SerializeField] SOPlayerData SO_playerData;
     [SerializeField] SOGameStartupPackage SO_GameStartupPackage;
-    [SerializeField] SOChapters SO_Chapters;
+    [SerializeField] SOChaptersBase SO_Chapters;
 
     [SerializeField] DialogWindowCaller dialogWindow;
     [SerializeField] NotificationCaller notificationCaller;
@@ -31,9 +31,7 @@ public class WindowLevels : MonoBehaviour
     [SerializeField] GameObject bar_locked;
 
 
-    /// <summary>
-    /// public
-    /// </summary>
+    //public
 
     public void NextLevel()
     {
@@ -84,9 +82,7 @@ public class WindowLevels : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// private
-    /// </summary>
+    //private
 
     private void OnEnable()
     {
@@ -103,22 +99,33 @@ public class WindowLevels : MonoBehaviour
         int enemiesKilled = 0;
         int chestsLooted = 0;
 
-        //load info from info file
-        //if (Serializer.LoadBin(PATH.LEVEL_INFO_FILE(so_levelsBase.currentLevelPointer), out Struct_LevelInfo levelInfoData))
-        //{
-        //    storyActivitiesCompleted = levelInfoData.storyCompleted;
-        //    enemiesKilled = levelInfoData.enemiesKilled;
-        //    chestsLooted = levelInfoData.chestsLooted;
-        //    print("WindowLevels: level info loaded from file");
-        //}
+
+        //load data from info file
+
+        string _path = PATH.GetDirectory(new string[]
+        {
+            PATH.LEVELS_FOLDER,
+            SO_GameStartupPackage.Chapter.ToString(),
+            SO_GameStartupPackage.Level.ToString(),
+            PATH.LEVELS_META_FILE
+        });
+
+        if (Serializer.LoadBin(_path, out Struct_LevelMeta levelMetaData))
+        {
+            storyActivitiesCompleted = levelMetaData.storyCompleted;
+            enemiesKilled = levelMetaData.enemiesKilled;
+            chestsLooted = levelMetaData.chestsLooted;
+            print("WindowLevels: level info loaded from file");
+        }
+
 
         var SO_Level = SO_Chapters.Get(SO_GameStartupPackage.Chapter).Get(SO_GameStartupPackage.Level);
 
         LevelData levelData = SO_Level.Get.GetComponent<LevelData>();
         levelData.BuildLevelData();
-        int storyActivitiesAll = levelData.StoryActivitiesAll;
-        int enemiesAll = levelData.EnemiesAll;
-        int chestsAll = levelData.ChestsAll;
+        int storyActivitiesAll = levelData.StoryActivitiesCount;
+        int enemiesAll = levelData.EnemiesCount;
+        int chestsAll = levelData.ChestsCount;
 
         text_storyActivitiesCompleted.text = $"{storyActivitiesCompleted}/{storyActivitiesAll}";
         text_enemiesKilled.text = $"{enemiesKilled}/{enemiesAll}";

@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class LevelData : MonoBehaviour
 {
@@ -12,10 +13,10 @@ public class LevelData : MonoBehaviour
 
     //ram
     private StoryActivity[] storyActivities;
-    private Entity[] enemies;
+    private EntityCore[] enemies;
     private ChestCore[] chests;
 
-    private void OnEnable()
+    private void Awake()
     {
         BuildLevelData();
     }
@@ -34,7 +35,7 @@ public class LevelData : MonoBehaviour
         if (chestHolder == null)
             chestHolder = GameObject.FindGameObjectWithTag(TAG.LEVEL_CHESTS);
 
-        enemies = enemiesHolder.transform.GetComponentsInChildren<Entity>();
+        enemies = enemiesHolder.transform.GetComponentsInChildren<EntityCore>();
         storyActivities = storyActivitiesHolder.transform.GetComponentsInChildren<StoryActivity>();
         chests = chestHolder.transform.GetComponentsInChildren<ChestCore>();
     }
@@ -74,12 +75,12 @@ public class LevelData : MonoBehaviour
             if (storyActivities == null)
                 return 0;
 
-            int counter = storyActivities.Count(item => item.IsActivityCompleted);
+            int counter = storyActivities.Count(item => item.IsCompleted);
             return counter;
         }
     }
 
-    public int StoryActivitiesAll
+    public int StoryActivitiesCount
     {
         get
         {
@@ -92,7 +93,7 @@ public class LevelData : MonoBehaviour
 
     public bool IsLevelCompleted
     {
-        get => StoryActivitiesCompleted == StoryActivitiesAll;
+        get => StoryActivitiesCompleted == StoryActivitiesCount;
     }
 
 
@@ -100,12 +101,12 @@ public class LevelData : MonoBehaviour
     /// enemies
     /// </summary>
 
-    public Entity[] Enemies
+    public EntityCore[] Enemies
     {
         get
         {
             if (enemies == null)
-                return new Entity[0];
+                return new EntityCore[0];
 
             return enemies;
         }
@@ -118,7 +119,7 @@ public class LevelData : MonoBehaviour
             if (enemies == null)
                 return 0;
 
-            int counter = enemies.Count(item => item.HealthSystem.Health <= 0);
+            int counter = enemies.Count(item => item.GetComponent<HealthSystem>().Health <= 0);
             return counter;
         }
     }
@@ -132,7 +133,7 @@ public class LevelData : MonoBehaviour
 
             int counter = enemies.Count(
                 item => 
-                item.HealthSystem.Health <= 0 
+                item.GetComponent<HealthSystem>().Health <= 0 
                 || item.IsRespawnedInMaxingMode);
 
             return counter;
@@ -148,14 +149,14 @@ public class LevelData : MonoBehaviour
 
             int counter = enemies.Count(
                 item =>
-                item.HealthSystem.Health <= 0
+                item.GetComponent<HealthSystem>().Health <= 0
                 && !item.IsRespawnedInMaxingMode);
 
             return counter;
         }
     }
 
-    public int EnemiesAll
+    public int EnemiesCount
     {
         get
         {
@@ -209,7 +210,7 @@ public class LevelData : MonoBehaviour
         }
     }
 
-    public int ChestsAll
+    public int ChestsCount
     {
         get
         {

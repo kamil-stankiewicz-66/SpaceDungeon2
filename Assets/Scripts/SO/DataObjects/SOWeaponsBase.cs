@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,13 +7,11 @@ public class SOWeaponsBase : ScriptableObject
     [HideInInspector] public Dictionary<int, bool> weaponsStatusData;
     [SerializeField] private GameObject[] weapons;
 
-    //block data
-    public bool isLoaded = false;
+
+    public bool IsLoaded { get; set; }
 
 
-    /// <summary>
-    /// only get
-    /// </summary>
+    //only get
     
     public int WeaponsCount
     {
@@ -22,31 +19,26 @@ public class SOWeaponsBase : ScriptableObject
     }
 
     
-    /// <summary>
-    /// public methods
-    /// </summary>
+    //public methods
 
-    public GameObject GetWeaponPrefab(int weaponNumber)
+    public GameObject GetWeaponPrefab(int id)
     {
-        if (weaponNumber >= weapons.Length)
-            return null;
-
-        return weapons[weaponNumber];
-    }
-
-    public Weapon GetWeaponCore(int weaponID)
-    {
-        if (weaponID >= weapons.Length)
+        if (id < 0 || weapons.Length <= id)
         {
-            Debug.LogWarning($"SO_WeapondBase: id >= weapons.Length {weaponID} {weapons.Length}");
+            Debug.LogWarning($"SO_WeapondBase: id out of range");
             return null;
         }
 
-        Weapon _w = weapons[weaponID].GetComponentEx<Weapon>();
+        return weapons[id];
+    }
+
+    public Weapon GetWeaponCore(int id)
+    {
+        Weapon _w = GetWeaponPrefab(id)?.GetComponentEx<Weapon>();
 
         if (_w == null)
         {
-            Debug.LogWarning("SO_WeapondBase: Downloaded weapon is null.");
+            Debug.LogWarning("SO_WeapondBase: weapon is null");
         }
 
         return _w;
@@ -64,8 +56,14 @@ public class SOWeaponsBase : ScriptableObject
 
     public void SetWeaponStatus(int _id, bool _value = true)
     {
-        weaponsStatusData.Remove(_id);
-        weaponsStatusData.Add(_id, true);
+        if (weaponsStatusData.ContainsKey(_id))
+        {
+            weaponsStatusData[_id] = _value;
+        }
+        else
+        {
+            weaponsStatusData.Add(_id, _value);
+        }
     }
 
     public void WeaponsStatusDictionaryBuild()
@@ -83,9 +81,9 @@ public class SOWeaponsBase : ScriptableObject
         }
     }
 
-    public void DataSetDefault()
+    public void SetDefault()
     {
         weaponsStatusData = null;
-        isLoaded = false;
+        IsLoaded = false;
     }
 }

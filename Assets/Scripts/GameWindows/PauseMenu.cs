@@ -1,12 +1,10 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] LevelSaver levelSaver;
-    [SerializeField] Counter counter;
-
     [SerializeField] GameObject pauseMenuHolder;
     [SerializeField] Transform levelHolder;
 
@@ -15,24 +13,61 @@ public class PauseMenu : MonoBehaviour
         text_enemiesKilled,
         text_chestLooted;
 
-    private LevelData levelData;
+    InputSystemActions inputActions;
+    LevelManager levelManager;
+    LevelSaver levelSaver;
+    Counter counter;
 
 
-    /// <summary>
-    /// public methods
-    /// </summary>
+    public bool IsPaused { get; private set; }
 
-    public void PauseOn()
+
+    //init
+
+    private void Awake()
+    {
+        inputActions = new InputSystemActions();
+        levelManager = FindAnyObjectByType<LevelManager>();
+        levelSaver = FindAnyObjectByType<LevelSaver>();
+        counter = FindAnyObjectByType<Counter>();
+
+        IsPaused = false;
+        inputActions.Player.Pause.performed += Pause;
+    }
+
+
+    //clear
+
+    private void OnDestroy()
+    {
+        inputActions.Player.Pause.performed -= Pause;
+    }
+
+
+    //public methods
+
+    void Pause(InputAction.CallbackContext context)
     {
         if (!GameMarks.CanPlayerPauseGame)
+        {
             return;
+        }
+
+        if (IsPaused)
+        {
+            return;
+        }
+
+        IsPaused = true;
 
         Time.timeScale = 0.0f;
-        GameMarks.TurnAllOff();
+        GameMarks.SetAll(false);
         pauseMenuHolder.SetActive(true);   
 
         if (levelSaver.SaveMode == LevelSaver.SaveModeEnum.InGame)
+        {
             levelSaver.SaveLevel();
+        }
 
         StartCoroutine(LoadData());
     }
@@ -41,7 +76,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuHolder.SetActive(false);
         counter.Call(timeInSeconds: 2,
-                     timeScaleAfter: 1.0f);
+                     timeScaleAfter: 1.0f,
+                     afterCountingAction: () => { IsPaused = false; });
     }
 
     public void ExitButton()
@@ -51,20 +87,14 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// private methods
-    /// </summary>
+    //private methods
 
     private IEnumerator LoadData()
     {
-        if (levelData == null)
-        {
-            levelData = levelHolder.GetComponentInChildren<LevelData>();
-        }
-
-        text_storyActivitiesCompleted.text = $"{levelData.StoryActivitiesCompleted}/{levelData.StoryActivitiesAll}";
-        text_enemiesKilled.text = $"{levelData.EnemiesKilledFixed}/{levelData.EnemiesAll}";
-        text_chestLooted.text = $"{levelData.ChestsLooted}/{levelData.ChestsAll}";
+        LevelData levelData = levelManager.ActiveLevel;
+        text_storyActivitiesCompleted.text = $"{levelData.StoryActivitiesCompleted}/{levelData.StoryActivitiesCount}";
+        text_enemiesKilled.text = $"{levelData.EnemiesKilledFixed}/{levelData.EnemiesCount}";
+        text_chestLooted.text = $"{levelData.ChestsLooted}/{levelData.ChestsCount}";
         yield return null;
     }
 }

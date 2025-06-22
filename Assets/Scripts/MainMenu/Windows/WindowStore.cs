@@ -35,9 +35,7 @@ public class WindowStore : MonoBehaviour
     private ItemData selectedItem;
 
 
-    /// <summary>
-    /// public
-    /// </summary>
+    //public
 
     public void Buy()
     {
@@ -49,18 +47,18 @@ public class WindowStore : MonoBehaviour
             return;
         }
 
-        if (so_playerData.Coins < selectedItem.Core.shopPrice)
+        if (so_playerData.Coins < selectedItem.Core.Price)
         {
             notificationCaller.Show("You don't have enough coins.");
             return;
         }
 
-        string _m = $"Are you sure you want to buy:\n'{selectedItem.Core.shopName}'\n" + $"for: {selectedItem.Core.shopPrice} coins?";
+        string _m = $"Are you sure you want to buy:\n'{selectedItem.Core.ItemName}'\n" + $"for: {selectedItem.Core.Price} coins?";
         UnityEvent _acceptEvent = new UnityEvent();
         _acceptEvent.AddListener(() =>
         {
             so_weaponsBase.SetWeaponStatus(selectedItem.Id, true);
-            so_playerData.Coins -= selectedItem.Core.shopPrice;
+            so_playerData.Coins -= selectedItem.Core.Price;
             Reload();
         });
 
@@ -86,9 +84,7 @@ public class WindowStore : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// unity callers
-    /// </summary>
+    //unity callers
 
     bool isIconsLoaded;
     private void OnEnable()
@@ -105,10 +101,12 @@ public class WindowStore : MonoBehaviour
         RefreshScrollbar();
 
         if (isIconsLoaded)
+        {
             return;
+        }
 
         icons = new ItemStoreIcon[so_weaponsBase.WeaponsCount];
-        for (short i = 0; i < so_weaponsBase.WeaponsCount; i++)
+        for (int i = 0; i < so_weaponsBase.WeaponsCount; i++)
         {
             Weapon _weapon = so_weaponsBase.GetWeaponCore(i);
             ItemStoreIcon _itemShopIcon =
@@ -116,16 +114,16 @@ public class WindowStore : MonoBehaviour
                 .GetComponent<ItemStoreIcon>();
 
             icons[i] = _itemShopIcon;
-            _itemShopIcon.Set(_weapon.shopIcon,
-                                      _weapon.shopName,
+            _itemShopIcon.Set(_weapon.Icon,
+                                      _weapon.ItemName,
                                       GetItemStatus(i, _weapon) != ItemStatus.Locked,
                                       i,
-                                      (short s) => SelectItem(s));
+                                      (int s) => SelectItem(s));
         }
+
         RefreshIcons();
         RefreshScrollbar();
         isIconsLoaded = true;
-
     }
 
     private void OnDisable()
@@ -135,9 +133,7 @@ public class WindowStore : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// private methods
-    /// </summary>
+    //private methods
     
     private void Reload()
     {
@@ -166,7 +162,7 @@ public class WindowStore : MonoBehaviour
         if (_core == null)
             return default;
 
-        if (_core.shopRequiredExpLevel > so_playerData.ExpLevel)
+        if (_core.RequiredExpLevel > so_playerData.ExpLevel)
             return ItemStatus.Locked;
 
         if (!so_weaponsBase.GetWeaponStatus(_id))
@@ -182,7 +178,9 @@ public class WindowStore : MonoBehaviour
     private void RefreshIcons()
     {
         if (icons == null)
+        {
             return;
+        }
 
         for (int i = 0; i < icons.Length; i++)
         {
@@ -218,8 +216,8 @@ public class WindowStore : MonoBehaviour
         }
 
         text_coins.text = so_playerData.Coins.ToString();
-        text_weapon_price.text = $"{selectedItem.Core.shopPrice} coins";
-        text_weapon_levelRequired.text = $"Required level: {selectedItem.Core.shopRequiredExpLevel}";
+        text_weapon_price.text = $"{selectedItem.Core.Price} coins";
+        text_weapon_levelRequired.text = $"Required level: {selectedItem.Core.RequiredExpLevel}";
 
         if (selectedItem.Status == ItemStatus.Locked)
         {
@@ -231,10 +229,10 @@ public class WindowStore : MonoBehaviour
         }
         else
         {
-            text_weapon_name.text = selectedItem.Core.shopName;
-            text_weapon_weaponType.text = selectedItem.Core.shopWeaponType.ToString();
-            text_weapon_damage.text = selectedItem.Core.damage.ToString();
-            text_weapon_fireRate.text = (1000.0f / selectedItem.Core.attackTimeOut).RoundTo(1).ToString() + "/s";
+            text_weapon_name.text = selectedItem.Core.ItemName;
+            text_weapon_weaponType.text = selectedItem.Core.ItemType.ToString();
+            text_weapon_damage.text = selectedItem.Core.Damage.ToString();
+            text_weapon_fireRate.text = (1000.0f / selectedItem.Core.AttackTimeOut).RoundTo(1).ToString() + "/s";
         }
 
         Debug.Log("WindowShop: StatsViewPanel refreshed.");
@@ -249,9 +247,7 @@ public class WindowStore : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// private objects
-    /// </summary>
+    //private objects
 
     private enum ItemStatus { Locked, Use, Using, Buy }
 

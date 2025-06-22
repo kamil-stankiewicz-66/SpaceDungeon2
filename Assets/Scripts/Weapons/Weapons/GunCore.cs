@@ -5,37 +5,56 @@ public class GunCore : Weapon
     [SerializeField] Transform gunBarrel;
     [SerializeField] GameObject bulletPrefab;
 
-    //anim
-    const string SHOOT_ANIM = "Shoot";
 
-    //attack
-    public override void Attack()
-    {
-        Transform parent = transform.parent;
-        Quaternion weaponQ = parent.rotation;
-        GameObject _newBullet = Instantiate(bulletPrefab, gunBarrel.position, weaponQ);
-
-        GunBullet bullet = _newBullet.GetComponent<GunBullet>();
-        bullet.bulletTag = parent.tag;
-        bullet.gameObject.tag = parent.tag;
-        bullet.bulletDamage = damage;
-        bullet.direction = weaponQ.ToAxisVector();
-
-        animator.Play(SHOOT_ANIM);
-    }
-
+    //init
     private void OnEnable()
     {
-        float t = animator.AnimationClipTime(SHOOT_ANIM) *1000;
-        if (attackTimeOut < t)
+        float t = animator.AnimationClipTime(ANIM) * 1000;
+        if (AttackTimeOut < t)
         {
-            float x = t / attackTimeOut;
+            float x = t / AttackTimeOut;
             animator.speed = x;
 
             print($"{gameObject.name} GunCore: anim lenght: " + t);
-            print($"{gameObject.name} GunCore: w lenght: " + attackTimeOut);
+            print($"{gameObject.name} GunCore: w lenght: " + AttackTimeOut);
             print($"{gameObject.name} GunCore: set animator speed to: " + x);
         }
+    }
+
+
+    //aim
+    public override void Aim(Vector2 target)
+    {
+        Vector2 position = transform.position;
+        Vector2 aimDir = (target - position).normalized;
+
+        float aimAngle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+
+        if (transform.lossyScale.x < 0f)
+        {
+            aimAngle += 180f;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
+    }
+
+
+    //attack
+    protected override void AttackAction()
+    {
+        Transform parent = transform.parent;
+
+        Quaternion aimAngle = transform.rotation;
+        if (transform.lossyScale.x < 0f)
+        {
+            aimAngle *= Quaternion.Euler(0f, 0f, 180f);
+        }
+
+        GameObject _newBullet = Instantiate(bulletPrefab, gunBarrel.position, aimAngle);
+
+        Bullet bullet = _newBullet.GetComponent<Bullet>();
+        bullet.gameObject.tag = parent.tag;
+        bullet.bulletDamage = Damage;
     }
 
 }
