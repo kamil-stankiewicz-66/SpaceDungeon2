@@ -56,8 +56,6 @@ public class LS_PlayerData : MonoBehaviour
 
         dataCopy.SaveBin(PATH.GetDirectory(PATH.PLAYERDATA_FILE));
         print("LS_PlayerData: PlayerData saved.");
-
-        SO_playerData.SetDefault();
     }
 
 }

@@ -53,7 +53,7 @@ public class GunCore : Weapon
         GameObject _newBullet = Instantiate(bulletPrefab, gunBarrel.position, aimAngle);
 
         Bullet bullet = _newBullet.GetComponent<Bullet>();
-        bullet.gameObject.tag = parent.tag;
+        bullet.bulletTag = parent.tag;
         bullet.bulletDamage = Damage;
     }
 

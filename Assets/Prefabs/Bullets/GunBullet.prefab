@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5997823098521797418}
   - component: {fileID: 2032759077400116936}
   - component: {fileID: 4469020136018195504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunBullet
-  m_TagString: Untagged
+  m_TagString: NotBulletColliding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e7ced0fcb56264daf2f0e500fbba00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletTag: 
   bulletDamage: 0
   bulletSpeed: 50
   particleEffect: {fileID: 6984896995991402233, guid: 90a553023568397428a027fd8d9961d6, type: 3}
@@ -72,7 +73,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -93,7 +94,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 264
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

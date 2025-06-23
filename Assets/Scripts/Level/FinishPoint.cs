@@ -3,16 +3,16 @@ using UnityEngine;
 public class FinishPoint : MonoBehaviour
 {
     private LevelData levelData;
-    private LevelFinalScreen levelFinalScreen;
+    private StatsViewPanel statsViewPanel;
     private bool m_trigger_used;
 
     private void Awake()
     {
         levelData = FindAnyObjectByType<LevelData>();
-        levelFinalScreen = FindAnyObjectByType<LevelFinalScreen>();
+        statsViewPanel = FindAnyObjectByType<StatsViewPanel>();
 
         if (levelData == null) Debug.LogError("FINISH_POINT :: level data not found");
-        if (levelFinalScreen == null) Debug.LogError("FINISH_POINT :: level final screen not found");
+        if (statsViewPanel == null) Debug.LogError("FINISH_POINT :: StatsViewPanel not found");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +36,9 @@ public class FinishPoint : MonoBehaviour
         m_trigger_used = true;
 
         //complete level
-        levelFinalScreen?.ShowWindow(LevelFinalScreen.FinalScreenModeEnum.LevelCompleted);
+        statsViewPanel?.Display(StatsViewPanel.EPanelMode.LevelCompleted);
+
+        //log
         print("FinishPoint: lvl complete");
     }
     

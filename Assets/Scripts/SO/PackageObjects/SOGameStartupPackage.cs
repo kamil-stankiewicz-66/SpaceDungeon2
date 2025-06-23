@@ -8,7 +8,7 @@ public class SOGameStartupPackage : ScriptableObject
 {
     [SerializeField] int m_chapter;
     [SerializeField] int m_level;
-    [SerializeField] EGameRunMode runMode;
+    [SerializeField] EGameRunMode m_mode;
 
     public int Chapter
     {
@@ -24,7 +24,19 @@ public class SOGameStartupPackage : ScriptableObject
 
     public EGameRunMode RunMode
     {
-        get => runMode;
-        set => runMode = value;
+        get => m_mode;
+    }
+
+
+    public void RefreshRunMode(SOChaptersBase @base)
+    {
+        switch (@base.Get(m_chapter).GetLevelState(m_level))
+        {
+            case ELevelState.Default: m_mode = EGameRunMode.Start; break;
+            case ELevelState.Started: m_mode = EGameRunMode.Continue; break;
+            case ELevelState.Completed: m_mode = EGameRunMode.Maxing; break;
+
+            default: m_mode = default; break;
+        }
     }
 }

@@ -61,12 +61,15 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
             SliderRefresh();
 
-            if (health <= 0.0f)
+            if (IsDead)
             {
                 gameObject.SetActive(false);
             }
         }
     }
+
+
+    public bool IsDead => health <= 0.0f;
 
 
 

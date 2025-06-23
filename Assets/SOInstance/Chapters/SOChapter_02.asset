@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea9eaa5f70921954d9031f999df2820b, type: 3}
-  m_Name: SOLevel_01_001
+  m_Script: {fileID: 11500000, guid: d87101b7c0184ba40afb3378c70aca1f, type: 3}
+  m_Name: SOChapter_02
   m_EditorClassIdentifier: 
-  levelHolder: {fileID: 3996462801943153107, guid: e4eef7daa26ddd449b101526a619a4e7, type: 3}
-  state: 1
+  title: 
+  levels: []

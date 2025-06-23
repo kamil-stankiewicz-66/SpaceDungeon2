@@ -9,6 +9,7 @@ public class DDOLSIObject : MonoBehaviour
         if (instance != null)
         {
             Destroy(gameObject);
+            return;
         }
 
         instance = gameObject;

@@ -24,8 +24,19 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        //load level data
+        SOChapter chapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter);
+        GameObject levelPrefab = chapter.GetLevelPrefab(SO_GameStartupPackage.Level);
+        ELevelState levelState = chapter.GetLevelState(SO_GameStartupPackage.Level);
+
         //load level
-        Instantiate(SO_Chapters.Get(SO_GameStartupPackage.Chapter).Get(SO_GameStartupPackage.Level).Get, levelHolder);
+        Instantiate(levelPrefab, levelHolder);
+
+        //set level state
+        if (levelState == ELevelState.Default)
+        {
+            chapter.SetLevelState(SO_GameStartupPackage.Level, ELevelState.Started);
+        }
 
         //scripts
         ActiveLevel = levelHolder.GetComponentInChildren<LevelData>();
@@ -56,11 +67,11 @@ public class LevelManager : MonoBehaviour
         {
             case EGameRunMode.Start:
             case EGameRunMode.Continue:
-                levelSaver.SaveModeChange(LevelSaver.SaveModeEnum.InGame);
+                levelSaver.ChangeSaverMode(LevelSaver.ESaveMode.InGame);
                 break;
 
             case EGameRunMode.Maxing:
-                levelSaver.SaveModeChange(LevelSaver.SaveModeEnum.Disable);
+                levelSaver.ChangeSaverMode(LevelSaver.ESaveMode.Disable);
                 break;
         }
 
@@ -84,7 +95,7 @@ public class LevelManager : MonoBehaviour
     public int CountExp()
     {
         LevelData levelData = ActiveLevel;
-        PlayerCore playerCore = FindAnyObjectByType<PlayerCore>();
+        PlayerCore playerCore = FindAnyObjectByType<PlayerCore>(FindObjectsInactive.Include);
 
         int _expForLevel = 0;
 
@@ -129,7 +140,7 @@ public class LevelManager : MonoBehaviour
         }
 
         //dead antibonus
-        if (playerCore.HealthSystem.Health <= 0)
+        if (playerCore.HealthSystem.IsDead)
         {
             _expForLevel /= 10;
         }

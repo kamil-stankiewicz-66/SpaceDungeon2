@@ -8,28 +8,18 @@ public class InputManager : MonoBehaviour
     InputAction moveAction;
     InputAction attackAction;
     InputAction healAction;
-
-    Vector2 moveAxis;
-    bool attack;
-    bool heal;
+    InputAction pauseAction;
 
 
     //getters
 
-    public Vector2 MoveAxis
-    {
-        get => moveAxis;
-    }
+    public Vector2 MoveAxis { get; private set; }
 
-    public bool AttackTrigger
-    {
-        get => attack;
-    }
+    public bool AttackTrigger { get; private set; }
 
-    public bool HealTrigger
-    {
-        get => heal;
-    }
+    public bool HealTrigger { get; private set; }
+
+    public bool PauseTrigger { get; private set; }
 
 
     //enable and disable
@@ -46,6 +36,7 @@ public class InputManager : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
         healAction = InputSystem.actions.FindAction("Heal");
+        pauseAction = InputSystem.actions.FindAction("Pause");
     }
 
 
@@ -53,9 +44,10 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        moveAxis = moveAction.ReadValue<Vector2>();
-        attack = attackAction.IsPressed();
-        heal = healAction.IsPressed();
+        MoveAxis = moveAction.ReadValue<Vector2>();
+        AttackTrigger = attackAction.IsPressed();
+        HealTrigger = healAction.IsPressed();
+        PauseTrigger = pauseAction.IsPressed();
     }
 
 }

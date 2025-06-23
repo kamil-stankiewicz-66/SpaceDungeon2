@@ -13,8 +13,8 @@ TagManager:
   - Collider
   - Enemy
   - Wall
-  - NotBulletColliding
   - SystemLogCaller
+  - NotBulletColliding
   layers:
   - Default
   - TransparentFX
@@ -24,7 +24,7 @@ TagManager:
   - UI
   - RaycastWall
   - TakeDamage
-  - 
+  - Bullet
   - 
   - 
   - 

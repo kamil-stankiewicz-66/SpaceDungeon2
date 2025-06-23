@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class LevelSaver : MonoBehaviour
 {
-    SystemLogCaller systemLogCaller;
+    [SerializeField] SystemLogCaller systemLogCaller;
+
     PlayerCore player;
     LevelManager levelManager;
 
 
-    public SaveModeEnum SaveMode { get; private set; }
+    public ESaveMode SaveMode { get; private set; }
 
 
 
     //public
 
-    public enum SaveModeEnum
+    public enum ESaveMode
     {
         Disable, InGame, PlayerDead, PlayerDeadInMaxingMode, LevelCompleted
     }
 
-    public void SaveModeChange(SaveModeEnum _saveMode)
+    public void ChangeSaverMode(ESaveMode _saveMode)
     {
         if (_saveMode == SaveMode)
         {
@@ -36,7 +37,6 @@ public class LevelSaver : MonoBehaviour
 
     private void Start()
     {
-        systemLogCaller = FindAnyObjectByType<SystemLogCaller>();
         player = FindAnyObjectByType<PlayerCore>();
         levelManager = FindAnyObjectByType<LevelManager>();
     }
@@ -54,13 +54,13 @@ public class LevelSaver : MonoBehaviour
     {
         switch (SaveMode)
         {
-            case SaveModeEnum.Disable:
+            case ESaveMode.Disable:
             {
                 systemLogCaller.ShowLog("Save is disabled in this mode.");
                 break;
             }
 
-            case SaveModeEnum.InGame:
+            case ESaveMode.InGame:
             {
                 Save_PlayerData();
                 Save_StoryActivities();
@@ -71,7 +71,7 @@ public class LevelSaver : MonoBehaviour
                 break;
             }
 
-            case SaveModeEnum.PlayerDead:
+            case ESaveMode.PlayerDead:
             {
                 Save_PlayerData(false);
                 Save_StoryActivities(false);
@@ -82,7 +82,7 @@ public class LevelSaver : MonoBehaviour
                 break;
             }
 
-            case SaveModeEnum.PlayerDeadInMaxingMode:
+            case ESaveMode.PlayerDeadInMaxingMode:
             {
                 Save_Chests();
                 Save_LevelMeta();
@@ -90,7 +90,7 @@ public class LevelSaver : MonoBehaviour
                 break;
             }
 
-            case SaveModeEnum.LevelCompleted:
+            case ESaveMode.LevelCompleted:
             {
                 Save_PlayerData(false);
                 Save_StoryActivities();

@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class LevelData : MonoBehaviour
 {
@@ -166,6 +165,7 @@ public class LevelData : MonoBehaviour
             return enemies.Length;
         }
     }
+
 
     /// <summary>
     /// chests

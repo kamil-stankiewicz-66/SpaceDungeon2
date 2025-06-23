@@ -56,9 +56,11 @@ public class AttackAbilityBasic : Ability
         }
         else
         {
-            character.CharacterAnimationController.EnableAutoFlip(true);
             Vector2 _direction = player.position - transform.position;
-            character.MovementSystem.Move(_direction.normalized, character.MovementSystem.RunSpeed);
+            _direction.Normalize();
+            character.MovementSystem.Move(_direction, character.MovementSystem.RunSpeed);
+            character.CharacterAnimationController.EnableAutoFlip(true);
+            character.CharacterAnimationController.SetMoveAxis(_direction);
             WeaponCore.AimReset();
         }
     }

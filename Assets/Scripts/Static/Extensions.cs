@@ -92,6 +92,19 @@ public static class GameObjectExtensions
 
         return childs;
     }
+
+    /// <summary>
+    /// Short to get components
+    /// </summary>
+    /// <typeparam name="T">Component</typeparam>
+    /// <param name="gameObject"></param>
+    /// <returns>component</returns>
+    public static T GetComponentEx<T>(this GameObject gameObject) where T : Component
+    {
+        return
+            gameObject.GetComponent<T>()
+            ?? gameObject.GetComponentInChildren<T>();
+    }
 }
 
 public static class AnimatorExtensions
@@ -155,7 +168,7 @@ public static class Extensions
     public static string CreateText(TextMeshProUGUI txt, int stat) => $"{txt.text.RemoveNums()} {stat}";
 }
 
-public static class TemplateExtensions
+public static class CollectionsExtensions
 {
     /// <summary>
     /// Remove nulls in array.
@@ -212,6 +225,13 @@ public static class TemplateExtensions
         return array[index];
     }
 
+    /// <summary>
+    /// Universal getter for lists.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
     public static T Get<T>(this List<T> list, int index)
     {
         if (list == null)
@@ -236,15 +256,25 @@ public static class TemplateExtensions
     }
 
     /// <summary>
-    /// Short to get components
+    /// Last index number.
     /// </summary>
-    /// <typeparam name="T">Component</typeparam>
-    /// <param name="gameObject"></param>
-    /// <returns>component</returns>
-    public static T GetComponentEx<T>(this GameObject gameObject) where T : Component
+    /// <typeparam name="T"></typeparam>
+    /// <param name="array"></param>
+    /// <returns></returns>
+    public static int GetLastIndex<T>(this T[] array)
     {
-        return
-            gameObject.GetComponent<T>()
-            ?? gameObject.GetComponentInChildren<T>();
+        if (array == null)
+        {
+            Debug.LogError("GET_LAST_INDEX :: array is null");
+            return 0;
+        }
+
+        if (array.Length == 0)
+        {
+            Debug.LogWarning("GET_LAST_INDEX :: array is empty");
+            return 0;
+        }
+
+        return array.Length - 1;
     }
 }

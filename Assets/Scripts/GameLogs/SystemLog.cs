@@ -12,16 +12,16 @@ public class SystemLog : MonoBehaviour
     protected const string ANIM_EXIT = "ExitAnim";
 
 
-    /// <summary>
-    /// private methods
-    /// </summary>
+    //private methods
 
     protected virtual void OnEnable()
     {
         animator = GetComponent<Animator>();
 
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips.Where(clip => clip.name == ANIM_EXIT))
+        {
             exitAnimLenght = clip.length;
+        }
     }
 
     protected virtual IEnumerator NotificationLog_DestroyCor()

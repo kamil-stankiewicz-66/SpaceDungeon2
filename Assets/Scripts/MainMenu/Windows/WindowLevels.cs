@@ -35,7 +35,7 @@ public class WindowLevels : MonoBehaviour
 
     public void NextLevel()
     {
-        if (!IsNextLevelExist())
+        if (!IsLocalNextLevelExist())
             return;
 
         SO_GameStartupPackage.Level++;
@@ -44,7 +44,7 @@ public class WindowLevels : MonoBehaviour
 
     public void PreLevel()
     {
-        if (!IsPreLevelExist())
+        if (!IsLocalPreLevelExist())
             return;
 
         SO_GameStartupPackage.Level--;
@@ -66,15 +66,21 @@ public class WindowLevels : MonoBehaviour
             return;
         }
 
+        
+        //refresh runmode
+        SO_GameStartupPackage.RefreshRunMode(SO_Chapters);
+
+
         UnityEvent e = new UnityEvent();
         e.AddListener(() => SceneManager.ChangeScene(Scene.Game));
         e.AddListener(() =>
         {
-            var level = SO_Chapters.Get(SO_GameStartupPackage.Chapter).Get(SO_GameStartupPackage.Level);
+            SOChapter chapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter);
+            ELevelState levelState = chapter.GetLevelState(SO_GameStartupPackage.Level);
 
-            if (level.State == ELevelState.Default)
+            if (levelState == ELevelState.Default)
             {
-                level.State = ELevelState.Started;
+                chapter.SetLevelState(SO_GameStartupPackage.Level, ELevelState.Started);
             }
         });
 
@@ -86,6 +92,9 @@ public class WindowLevels : MonoBehaviour
 
     private void OnEnable()
     {
+        int _lastLevelInThisChapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter).GetCurrentOrLastLevelPtr();
+        SO_GameStartupPackage.Level = _lastLevelInThisChapter;
+
         RefreshWindow();
     }
 
@@ -98,6 +107,10 @@ public class WindowLevels : MonoBehaviour
         int storyActivitiesCompleted = 0;
         int enemiesKilled = 0;
         int chestsLooted = 0;
+
+
+        //refresh runmode
+        SO_GameStartupPackage.RefreshRunMode(SO_Chapters);
 
 
         //load data from info file
@@ -118,10 +131,10 @@ public class WindowLevels : MonoBehaviour
             print("WindowLevels: level info loaded from file");
         }
 
+        SOChapter chapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter);
+        GameObject levelPrefab = chapter.GetLevelPrefab(SO_GameStartupPackage.Level);
 
-        var SO_Level = SO_Chapters.Get(SO_GameStartupPackage.Chapter).Get(SO_GameStartupPackage.Level);
-
-        LevelData levelData = SO_Level.Get.GetComponent<LevelData>();
+        LevelData levelData = levelPrefab.GetComponent<LevelData>();
         levelData.BuildLevelData();
         int storyActivitiesAll = levelData.StoryActivitiesCount;
         int enemiesAll = levelData.EnemiesCount;
@@ -130,27 +143,6 @@ public class WindowLevels : MonoBehaviour
         text_storyActivitiesCompleted.text = $"{storyActivitiesCompleted}/{storyActivitiesAll}";
         text_enemiesKilled.text = $"{enemiesKilled}/{enemiesAll}";
         text_chestLooted.text = $"{chestsLooted}/{chestsAll}";
-
-        //run mode
-        switch (SO_Level.State)
-        {
-            case ELevelState.Default:
-                SO_GameStartupPackage.RunMode = EGameRunMode.Start;
-                break;
-
-            case ELevelState.Started:
-                SO_GameStartupPackage.RunMode = EGameRunMode.Continue;
-                break;
-
-            case ELevelState.Completed:
-                SO_GameStartupPackage.RunMode = EGameRunMode.Maxing;
-                break;
-
-            default:
-                SO_GameStartupPackage.RunMode = default;
-                break;
-        }
-
 
         if (IsPreLevelCompleted())
         {
@@ -169,18 +161,22 @@ public class WindowLevels : MonoBehaviour
         levelProgressBar.maxValue = levelsActivitiesAll;
 
         if (storyActivitiesCompleted < storyActivitiesAll)
+        {
             text_completedStory.text = "Completed story: No";
+        }
         else
+        {
             text_completedStory.text = "Completed story: Yes";
+        }
     }
 
     private void ButtonsRefresh()
     {
         //next lvl
-        button_nextLvl.SetActive(IsNextLevelExist());
+        button_nextLvl.SetActive(IsLocalNextLevelExist());
 
         //pre lvl
-        button_preLvl.SetActive(IsPreLevelExist());
+        button_preLvl.SetActive(IsLocalPreLevelExist());
     }
 
     private void ChangePlayBar(GameObject _bar)
@@ -196,21 +192,35 @@ public class WindowLevels : MonoBehaviour
             return true;
         }
 
-        return SO_Chapters.Get(SO_GameStartupPackage.Chapter).Get(SO_GameStartupPackage.Level).State == ELevelState.Completed;
+        var preLevel = SO_Chapters.GetPreviousPtr(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level);
+        return SO_Chapters.Get(preLevel.Item1).GetLevelState(preLevel.Item2) == ELevelState.Completed;
     }
 
     private bool IsPreLevelExist()
     {
-        return SO_GameStartupPackage.Level > 0;
+        var preLevelPtr = SO_Chapters.GetPreviousPtr(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level);
+        int preChapter = preLevelPtr.Item1;
+        int preLevel = preLevelPtr.Item2;
+
+        return SO_GameStartupPackage.Chapter != preChapter || SO_GameStartupPackage.Level != preLevel;
+    }
+
+    private bool IsLocalPreLevelExist()
+    {
+        return SO_GameStartupPackage.Level != 0;
     }
 
     private bool IsNextLevelExist()
     {
-        if (SO_Chapters.Size == 0)
-        {
-            return false;
-        }
+        var nextLevelPtr = SO_Chapters.GetNextPtr(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level);
+        int nextChapter = nextLevelPtr.Item1;
+        int nextLevel = nextLevelPtr.Item2;
 
-        return SO_GameStartupPackage.Level < (SO_Chapters.Get(SO_GameStartupPackage.Chapter).Size -1);
+        return SO_GameStartupPackage.Chapter != nextChapter || SO_GameStartupPackage.Level != nextLevel;
+    }
+
+    private bool IsLocalNextLevelExist()
+    {
+        return SO_GameStartupPackage.Level < SO_Chapters.Get(SO_GameStartupPackage.Chapter).GetLastIndex();
     }
 }

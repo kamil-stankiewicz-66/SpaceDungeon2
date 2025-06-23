@@ -25,7 +25,7 @@ public class LS_ChaptersBase : MonoBehaviour
             {
                 for (int j = 0; j < SO_chapters.Get(i).Size; j++)
                 {
-                    SO_chapters.Get(i).Get(j).State = data.levels_state_data[(i, j)];
+                    SO_chapters.Get(i).SetLevelState(j, data.levels_state_data[(i, j)]);
                 }
             }
 
@@ -50,14 +50,12 @@ public class LS_ChaptersBase : MonoBehaviour
         {
             for (int j = 0; j < SO_chapters.Get(i).Size; j++)
             {
-                dataCopy.levels_state_data[(i, j)] = SO_chapters.Get(i).Get(j).State;
+                dataCopy.levels_state_data[(i, j)] = SO_chapters.Get(i).GetLevelState(j);
             }
         }
 
         dataCopy.SaveBin(PATH.GetDirectory(PATH.LEVELRUNMODE_FILE));
         print("LS_LevelsBase: LevelsBase saved.");
-
-        SO_chapters.SetDefault();
     }
 
 }

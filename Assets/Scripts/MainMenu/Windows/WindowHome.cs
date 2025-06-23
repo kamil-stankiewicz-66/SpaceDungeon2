@@ -7,6 +7,8 @@ public class WindowHome : MonoBehaviour, IWindow
     //so
     [SerializeField] SOPlayerData SO_playerData;
     [SerializeField] SOParameters SO_parameters;
+    [SerializeField] SOChaptersBase SO_chaptersBase;
+    [SerializeField] SOGameStartupPackage SO_gameStartupPackage;
 
     //stats bar
     [SerializeField] TextMeshProUGUI text_maxHealth;
@@ -22,6 +24,9 @@ public class WindowHome : MonoBehaviour, IWindow
     [SerializeField] GameObject continueBar;
     [SerializeField] TextMeshProUGUI text_lvlNum;
 
+    //link
+    WindowLevels windowLevels;
+
     //ram
     string maxHealthOriginal;
     string damageOriginal;
@@ -30,6 +35,8 @@ public class WindowHome : MonoBehaviour, IWindow
 
     private void Awake()
     {
+        windowLevels = FindAnyObjectByType<WindowLevels>(FindObjectsInactive.Include);
+
         maxHealthOriginal = text_maxHealth.text;
         damageOriginal = text_damageAdd.text;
         coinsOriginal = text_coins.text;
@@ -50,8 +57,16 @@ public class WindowHome : MonoBehaviour, IWindow
         text_expPoints.text = SO_playerData.Exp.ToString();
 
         //continue bar
-        //levelsBase.currentLevelPointer = levelsBase.GetNextLevelPointer();
-        //text_lvlNum.text = $"Lvl: {levelsBase.currentLevelPointer.chapterNum + 1}.{levelsBase.currentLevelPointer.levelNum + 1}";
-        //continueBar.SetActive(true);
+        (int, int) _levelPtr = SO_chaptersBase.GetCurrentOrLastLevelPtr();
+        text_lvlNum.text = $"Lvl: {_levelPtr.Item1 + 1}.{_levelPtr.Item2 + 1}";
+        continueBar.SetActive(true);
+    }
+
+    public void ContinueButton()
+    {
+        (int, int) _levelPtr = SO_chaptersBase.GetCurrentOrLastLevelPtr();
+        SO_gameStartupPackage.Chapter = _levelPtr.Item1;
+        SO_gameStartupPackage.Level = _levelPtr.Item2;
+        windowLevels.ButtonPlay();
     }
 }

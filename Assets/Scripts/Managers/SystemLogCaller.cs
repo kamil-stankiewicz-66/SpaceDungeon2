@@ -6,9 +6,7 @@ public class SystemLogCaller : MonoBehaviour
     [SerializeField] protected GameObject log_prefab;
 
 
-    /// <summary>
-    /// public methods
-    /// </summary>
+    //public methods
 
     public void ShowLog(string _content)
     {

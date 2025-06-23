@@ -17,38 +17,38 @@ public class Bullet : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision) => CollisionCheck(collision);
+    private void OnTriggerEnter2D(Collider2D collision) => CollisionCheck(collision, false);
 
-    private void OnCollisionEnter2D(Collision2D collision) => CollisionCheck(collision.collider);
+    private void OnCollisionEnter2D(Collision2D collision) => CollisionCheck(collision.collider, true);
 
 
-    void CollisionCheck(Collider2D collision)
+    void CollisionCheck(Collider2D collision, bool destroy)
     {
-        //dont destroy if
-        if (SkipCollision(collision))
+        if (!SkipCollision(collision))
         {
-            return;
-        }
+            IDamageable damageable = collision.GetComponent<IDamageable>();
 
-        //hit
-        IDamageable damageable;
-        if (collision.TryGetComponent(out damageable))
-        {
-            damageable.Damage(bulletDamage);
-        }
-        else if (collision.transform.parent != null)
-        {
-            if (collision.TryGetComponent(out damageable))
+            Transform parent = collision.transform.parent;
+            if (damageable == null && parent != null)
             {
-                damageable.Damage(bulletDamage);
+                damageable = parent.GetComponent<IDamageable>();
+            }
+
+            if (damageable != null)
+            {
+                damageable?.Damage(bulletDamage);
+                destroy = true;
             }
         }
 
-        //log
-        print("Bullet: destroyed " + collision.name + " " + collision.tag);
+        if (destroy)
+        {
+            //log
+            print("Bullet: destroyed " + collision.name + " " + collision.tag);
 
-        //destroy
-        Destroy(gameObject);
+            //destroy
+            Destroy(gameObject);
+        }
     }
 
     bool SkipCollision(Collider2D collision)

@@ -42,8 +42,6 @@ public class LS_WeaponsBase : MonoBehaviour
 
         dataCopy.SaveBin(PATH.GetDirectory(PATH.WEAPONSBASE_FILE));
         print("LS_WeaponsBase: WeaponsBase saved.");
-
-        SO_WeaponsBase.SetDefault();
     }
 
 }
