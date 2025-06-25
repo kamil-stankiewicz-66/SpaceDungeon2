@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCore : Character
 {
@@ -39,7 +40,6 @@ public class PlayerCore : Character
     {
         MovementControl();
         UseItemControl();
-        FlipControl();
         WeaponAimControl();
     }
 
@@ -90,7 +90,6 @@ public class PlayerCore : Character
             return;
         }
 
-
         //flip
 
         bool _autoFlip = !IsAiming;
@@ -107,13 +106,36 @@ public class PlayerCore : Character
     {
         Weapon _weapon = EquipmentSystem.ActiveItem as Weapon;
 
-        if (!PlayerHealthSystem.IsHealing && IsAiming)
+
+        //disable when healing
+
+        if (PlayerHealthSystem.IsHealing)
         {
-            _weapon?.Aim(PlayerPerception.AttackTarget.transform.position);
+            _weapon?.AimReset();
+            return;
+        }
+
+
+        //aim and flip
+
+        if (IsAiming)
+        {
+            WeaponAimControllerHelper(_weapon, PlayerPerception.AttackTarget.transform.position);
         }
         else
         {
-            _weapon?.AimReset();
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            mouseWorldPos.z = 0f;
+
+            WeaponAimControllerHelper(_weapon, mouseWorldPos);
         }
+    }
+
+    void WeaponAimControllerHelper(Weapon weapon, Vector3 target)
+    {
+        weapon?.Aim(target);
+
+        bool _flip = (target.x - transform.position.x) < 0.0f;
+        CharacterAnimationController.Flip(_flip);
     }
 }

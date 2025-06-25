@@ -19,6 +19,9 @@ public class LS_WeaponsBase : MonoBehaviour
         }
 
         print("LS_WeaponsBase: WeaponsBase loading started.");
+
+        SO_WeaponsBase.SetDefault();
+
         if (Serializer.LoadBin(PATH.GetDirectory(PATH.WEAPONSBASE_FILE), out Struct_WeaponsBaseData data))
         {
             SO_WeaponsBase.weaponsStatusData = data.weaponsStatusData;

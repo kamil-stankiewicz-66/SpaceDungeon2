@@ -1,4 +1,3 @@
-using Unity.Collections;
 using UnityEngine;
 
 public enum EGameRunMode { Start, Continue, Maxing }
@@ -39,4 +38,5 @@ public class SOGameStartupPackage : ScriptableObject
             default: m_mode = default; break;
         }
     }
+
 }

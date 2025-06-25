@@ -19,8 +19,12 @@ public class LS_ChaptersBase : MonoBehaviour
         }
 
         print("LS_LevelsBase: LevelBase loading started.");
+
+        SO_chapters.SetDefault();
+
         if (Serializer.LoadBin(PATH.GetDirectory(PATH.LEVELRUNMODE_FILE), out Struct_LevelBaseData data))
         {
+
             for (int i = 0; i < SO_chapters.Size; i++)
             {
                 for (int j = 0; j < SO_chapters.Get(i).Size; j++)
@@ -33,8 +37,6 @@ public class LS_ChaptersBase : MonoBehaviour
         }
         else
         {
-            SO_chapters.SetDefault();
-
             print("LS_LevelsBase: Level base data set default.");
         }
 

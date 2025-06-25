@@ -93,18 +93,6 @@ public static class GameObjectExtensions
         return childs;
     }
 
-    /// <summary>
-    /// Short to get components
-    /// </summary>
-    /// <typeparam name="T">Component</typeparam>
-    /// <param name="gameObject"></param>
-    /// <returns>component</returns>
-    public static T GetComponentEx<T>(this GameObject gameObject) where T : Component
-    {
-        return
-            gameObject.GetComponent<T>()
-            ?? gameObject.GetComponentInChildren<T>();
-    }
 }
 
 public static class AnimatorExtensions

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class Weapon : Item
 {
-    [SerializeField] protected Animator animator;
     [SerializeField] float attackTimeOut;
     [SerializeField] float range;
     [SerializeField] float damage;
 
+    protected Animator animator;
     protected const string ANIM = "Attack";
 
     float timeOut;
@@ -14,25 +14,13 @@ public abstract class Weapon : Item
 
 
 
-    //getters
+    //property
 
-    public float AttackTimeOut
-    {
-        get => attackTimeOut;
-        set => attackTimeOut = value;
-    }
+    public float AttackTimeOut { get => attackTimeOut; }
 
-    public float Range
-    {
-        get => range;
-        set => range = value;
-    }
+    public float Range { get => range; }
 
-    public float Damage
-    {
-        get => damage;
-        set => damage = value;
-    }
+    public float Damage { get => damage; }
 
 
 
@@ -66,7 +54,7 @@ public abstract class Weapon : Item
         }
 
         timeAcc = 0.0f;
-        timeOut = MathV.RandomAround(attackTimeOut, 10);
+        timeOut = MathV.RandomAround(AttackTimeOut, 10);
 
         AttackAction();
 
@@ -84,7 +72,12 @@ public abstract class Weapon : Item
 
 
 
-    //engine
+    //engine    
+
+    protected virtual void OnEnable()
+    {
+        animator = gameObject.GetComponentInChildren<Animator>();
+    }
 
     private void Update()
     {

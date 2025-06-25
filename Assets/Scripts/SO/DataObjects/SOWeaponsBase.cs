@@ -34,7 +34,7 @@ public class SOWeaponsBase : ScriptableObject
 
     public Weapon GetWeaponCore(int id)
     {
-        Weapon _w = GetWeaponPrefab(id)?.GetComponentEx<Weapon>();
+        Weapon _w = GetWeaponPrefab(id)?.GetComponentInChildren<Weapon>();
 
         if (_w == null)
         {

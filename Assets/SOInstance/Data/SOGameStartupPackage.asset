@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SOGameStartupPackage
   m_EditorClassIdentifier: 
   m_chapter: 0
-  m_level: 0
-  runMode: 2
+  m_level: 2
+  m_mode: 0

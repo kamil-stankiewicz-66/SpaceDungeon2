@@ -25,6 +25,8 @@ public class LS_PlayerData : MonoBehaviour
         print("LS_PlayerData: PlayerData: exp_points (not_loaded) " + SO_playerData.Exp);
         print("LS_PlayerData: PlayerData: coins (not_loaded) " + SO_playerData.Coins);
 
+        SO_playerData.SetDefault();
+
         if (Serializer.LoadBin(PATH.GetDirectory(PATH.PLAYERDATA_FILE), out Struct_PlayerData data))
         {
             SO_playerData.WeaponID = data.weaponNr;
@@ -32,10 +34,6 @@ public class LS_PlayerData : MonoBehaviour
             SO_playerData.Exp = data.exp;
 
             print("LS_PlayerData: Player data loaded.");
-        }
-        else
-        {
-            SO_playerData.SetDefault();
         }
 
         print("LS_PlayerData: PlayerData: weapon (loaded) " + SO_playerData.WeaponID);

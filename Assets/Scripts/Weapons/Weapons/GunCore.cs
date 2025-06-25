@@ -7,8 +7,10 @@ public class GunCore : Weapon
 
 
     //init
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         float t = animator.AnimationClipTime(ANIM) * 1000;
         if (AttackTimeOut < t)
         {
@@ -30,9 +32,10 @@ public class GunCore : Weapon
 
         float aimAngle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
 
-        if (transform.lossyScale.x < 0f)
+        bool isFliped = transform.lossyScale.x < 0.0f;
+        if (isFliped)
         {
-            aimAngle += 180f;
+            aimAngle += 180.0f;
         }
 
         transform.rotation = Quaternion.Euler(0, 0, aimAngle);
