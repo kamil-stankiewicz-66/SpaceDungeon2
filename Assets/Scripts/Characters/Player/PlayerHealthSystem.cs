@@ -51,7 +51,7 @@ public class PlayerHealthSystem : HealthSystem
 
     public void AddHealPoints(float value)
     {
-        if (!GameMarks.HealPointsChangeOn)
+        if (!GameMarks.HealPointsChangeEnable)
         {
             return;
         }

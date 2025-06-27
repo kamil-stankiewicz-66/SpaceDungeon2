@@ -28,9 +28,15 @@ public class GunCore : Weapon
     public override void Aim(Vector2 target)
     {
         Vector2 position = transform.position;
-        Vector2 aimDir = (target - position).normalized;
+        Vector2 direction = target - position;
 
-        float aimAngle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        float aimAngle = 0.0f;
+
+        if (direction != Vector2.zero)
+        {
+            direction.Normalize();
+            aimAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        }
 
         bool isFliped = transform.lossyScale.x < 0.0f;
         if (isFliped)

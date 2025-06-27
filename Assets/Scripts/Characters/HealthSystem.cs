@@ -27,7 +27,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
     protected void OnDisable()
     {
-        if (!GameMarks.ParticlesOn)
+        if (!GameMarks.ParticlesEnable)
         {
             print($"{gameObject.name}: HealthSystemEntity: blood particle effect skiped (particles disabled in game marks)");
             return;
@@ -39,7 +39,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnApplicationQuit() => GameMarks.ParticlesOn = false;
+    private void OnApplicationQuit() => GameMarks.ParticlesEnable = false;
 
 
 
@@ -82,7 +82,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
     public void AddHealth(float value)
     {
-        if (!GameMarks.HealthChangeOn)
+        if (!GameMarks.HealthChangeEnable)
         {
             return;
         }

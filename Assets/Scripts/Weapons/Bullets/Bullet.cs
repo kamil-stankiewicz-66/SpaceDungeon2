@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameMarks.ParticlesOn)
+        if (GameMarks.ParticlesEnable)
         {
             Instantiate(particleEffect, transform.position, Quaternion.identity);
         }

@@ -37,7 +37,7 @@ public class MovementSystem : MonoBehaviour
 
     public void Move(Vector2 direction, float speed)
     {
-        if (!GameMarks.EntitiesAIOn)
+        if (!GameMarks.EntitiesAIEnable)
         {
             return;
         }

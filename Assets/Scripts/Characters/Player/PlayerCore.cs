@@ -38,6 +38,11 @@ public class PlayerCore : Character
 
     private void Update()
     {
+        if (!GameMarks.PlayerInputEnable)
+        {
+            return;
+        }
+
         MovementControl();
         UseItemControl();
         WeaponAimControl();
@@ -120,22 +125,39 @@ public class PlayerCore : Character
 
         if (IsAiming)
         {
-            WeaponAimControllerHelper(_weapon, PlayerPerception.AttackTarget.transform.position);
+            WeaponAimControlHelper(_weapon, PlayerPerception.AttackTarget.transform.position);
         }
         else
         {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            mouseWorldPos.z = 0f;
-
-            WeaponAimControllerHelper(_weapon, mouseWorldPos);
+            WeaponAimControlManual(_weapon);
         }
     }
 
-    void WeaponAimControllerHelper(Weapon weapon, Vector3 target)
+    void WeaponAimControlManual(Weapon weapon)
+    {
+        Vector3 target = weapon.transform.position;
+
+        //analog controller
+        if (inputManager.AnalogAimAxis.sqrMagnitude > 0.1f)
+        {
+            target.x += inputManager.AnalogAimAxis.x;
+            target.y += inputManager.AnalogAimAxis.y;
+        }
+        //mouse input
+        else
+        {
+            target = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            target.z = weapon.transform.position.z;
+        }
+
+        WeaponAimControlHelper(weapon, target);
+    }
+
+    void WeaponAimControlHelper(Weapon weapon, Vector3 target)
     {
         weapon?.Aim(target);
 
-        bool _flip = (target.x - transform.position.x) < 0.0f;
+        bool _flip = (target.x - weapon.transform.position.x) < 0.0f;
         CharacterAnimationController.Flip(_flip);
     }
 }

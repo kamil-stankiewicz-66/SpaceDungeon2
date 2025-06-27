@@ -26,7 +26,7 @@ public class EquipmentSystem : MonoBehaviour
 
     //add and remove item
 
-    public void AddItem(Item item, uint amount = 1u)
+    public void AddItemToEquipment(Item item, uint amount = 1u)
     {
         if (amount == 0)
         {
@@ -48,7 +48,7 @@ public class EquipmentSystem : MonoBehaviour
         equipment[index] = updated;
     }
 
-    public void RemoveItem(Item item, uint amount = 1u)
+    public void RemoveItemFromEquipment(Item item, uint amount = 1u)
     {
         if (amount == 0)
         {
@@ -75,7 +75,7 @@ public class EquipmentSystem : MonoBehaviour
 
 
     
-    //public
+    //items managment
 
     public void SetActiveItem(Item item)
     {
@@ -111,6 +111,7 @@ public class EquipmentSystem : MonoBehaviour
         ActiveItem = Instantiate(itemObj, hand.transform).GetComponent<Item>();
         ActiveItem.UserTag = gameObject.tag;
 
+        //fix scale
         Vector2 localScale = ActiveItem.transform.localScale;
         Vector3 parentScale = hand.transform.lossyScale;
         ActiveItem.transform.localScale = localScale / parentScale;
@@ -118,16 +119,47 @@ public class EquipmentSystem : MonoBehaviour
 
     public void HideActiveItem()
     {
-        AddItem(ActiveItem);
+        AddItemToEquipment(ActiveItem);
         ActiveItem = null;
+    }
+
+    public void SetActiveItemFromEquipment(Item item)
+    {
+        RemoveItemFromEquipment(item);
+        SetActiveItem(item);
+    }
+
+    public void SetActiveItemFromEquipment(int index)
+    {
+        ItemEntry itemEntry = equipment.Get(index);
+        SetActiveItemFromEquipment(itemEntry.item);
     }
 
 
 
-    //private
+    //engnine
 
     private void OnEnable()
     {
         SetActiveItem(ActiveItem);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!autoLoot)
+        {
+            return;
+        }
+
+        if (collision == null)
+        {
+            return;
+        }
+
+        if (collision.TryGetComponent(out Item item))
+        {
+            AddItemToEquipment(item);
+        }
+    }
+
 }

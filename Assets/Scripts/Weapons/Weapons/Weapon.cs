@@ -48,11 +48,6 @@ public abstract class Weapon : Item
             return;
         }
 
-        if (!GameMarks.ItemsOn)
-        {
-            return;
-        }
-
         timeAcc = 0.0f;
         timeOut = MathV.RandomAround(AttackTimeOut, 10);
 
