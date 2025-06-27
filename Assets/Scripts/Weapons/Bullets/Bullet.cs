@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
 
             if (damageable != null)
             {
-                damageable?.Damage(bulletDamage);
+                damageable.Damage(bulletDamage);
                 destroy = true;
             }
         }

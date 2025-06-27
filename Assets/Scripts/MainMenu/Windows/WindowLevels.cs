@@ -75,12 +75,11 @@ public class WindowLevels : MonoBehaviour
         e.AddListener(() => SceneManager.ChangeScene(Scene.Game));
         e.AddListener(() =>
         {
-            SOChapter chapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter);
-            ELevelState levelState = chapter.GetLevelState(SO_GameStartupPackage.Level);
+            ELevelState levelState = SO_Chapters.GetLevelState(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level);
 
             if (levelState == ELevelState.Default)
             {
-                chapter.SetLevelState(SO_GameStartupPackage.Level, ELevelState.Started);
+                SO_Chapters.SetLevelState(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level, ELevelState.Started);
             }
         });
 
@@ -92,7 +91,7 @@ public class WindowLevels : MonoBehaviour
 
     private void OnEnable()
     {
-        int _lastLevelInThisChapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter).GetCurrentOrLastLevelPtr();
+        int _lastLevelInThisChapter = SO_Chapters.GetLocalCurrentOrLastLevelPtr(SO_GameStartupPackage.Chapter);
         SO_GameStartupPackage.Level = _lastLevelInThisChapter;
 
         RefreshWindow();
@@ -193,7 +192,7 @@ public class WindowLevels : MonoBehaviour
         }
 
         var preLevel = SO_Chapters.GetPreviousPtr(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level);
-        return SO_Chapters.Get(preLevel.Item1).GetLevelState(preLevel.Item2) == ELevelState.Completed;
+        return SO_Chapters.GetLevelState(preLevel.Item1, preLevel.Item2) == ELevelState.Completed;
     }
 
     private bool IsPreLevelExist()

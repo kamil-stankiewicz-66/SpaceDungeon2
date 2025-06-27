@@ -44,7 +44,9 @@ public class ChestCore : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips.Where(clip => clip.name == ANIM_TRIGGER))
+        {
             triggerAnimLenght = clip.length;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,11 +66,16 @@ public class ChestCore : MonoBehaviour
 
     private IEnumerator Open()
     {
+        //trigger
         animator?.Play(ANIM_TRIGGER);
         yield return new WaitForSeconds(triggerAnimLenght);
+
+        //open
         spriteRenderer.sprite = SO_chestType.openEmpty;
         animator?.Play(ANIM_OPEN);
-        SO_playerData.Coins += coinsInChest;
+
+        //empty
+        SO_playerData.AddCoins(coinsInChest);
         systemLogCaller?.ShowLog($"+{coinsInChest} coins");
     }
 

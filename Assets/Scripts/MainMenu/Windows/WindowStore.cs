@@ -58,7 +58,7 @@ public class WindowStore : MonoBehaviour
         _acceptEvent.AddListener(() =>
         {
             so_weaponsBase.SetWeaponStatus(selectedItem.Id, true);
-            so_playerData.Coins -= selectedItem.Core.Price;
+            so_playerData.AddCoins(-selectedItem.Core.Price);
             Reload();
         });
 
@@ -79,7 +79,7 @@ public class WindowStore : MonoBehaviour
             return;
         }
 
-        so_playerData.WeaponID = selectedItem.Id;
+        so_playerData.SetWeaponID(selectedItem.Id);
         Reload();
     }
 

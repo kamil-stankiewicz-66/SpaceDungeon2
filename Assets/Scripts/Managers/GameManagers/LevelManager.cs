@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
         //load level data
         SOChapter chapter = SO_Chapters.Get(SO_GameStartupPackage.Chapter);
         GameObject levelPrefab = chapter.GetLevelPrefab(SO_GameStartupPackage.Level);
-        ELevelState levelState = chapter.GetLevelState(SO_GameStartupPackage.Level);
+        ELevelState levelState = SO_Chapters.GetLevelState(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level);
 
         //load level
         Instantiate(levelPrefab, levelHolder);
@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
         //set level state
         if (levelState == ELevelState.Default)
         {
-            chapter.SetLevelState(SO_GameStartupPackage.Level, ELevelState.Started);
+            SO_Chapters.SetLevelState(SO_GameStartupPackage.Chapter, SO_GameStartupPackage.Level, ELevelState.Started);
         }
 
         //scripts

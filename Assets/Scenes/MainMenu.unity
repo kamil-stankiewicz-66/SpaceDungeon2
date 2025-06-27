@@ -10854,55 +10854,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1518606269}
   - component: {fileID: 1518606270}
-  - component: {fileID: 1518606268}
-  - component: {fileID: 1518606267}
-  - component: {fileID: 1518606266}
   m_Layer: 0
-  m_Name: --LS_Managers--
+  m_Name: --LSManager--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1518606266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518606265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5501bcb04e7597c4493e962d20df554b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SO_WeaponsBase: {fileID: 11400000, guid: 2834ba5bfcacf344a9f39dae9430fdc9, type: 2}
---- !u!114 &1518606267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518606265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c52b7619db0b944fb9fe1c31b3c65cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SO_chapters: {fileID: 11400000, guid: cc7cae8f67c469645b67fde650c63b22, type: 2}
---- !u!114 &1518606268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518606265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9d944806abb8d54ca4e43b575a9103b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SO_playerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
 --- !u!4 &1518606269
 Transform:
   m_ObjectHideFlags: 0
@@ -10927,9 +10885,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1518606265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab72f2a93875f5d448c6fbdb9f02d40a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ce7a1a02df14dc45886c2dd14a82f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SO_PlayerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
+  SO_WeaponsBase: {fileID: 11400000, guid: 2834ba5bfcacf344a9f39dae9430fdc9, type: 2}
+  SO_ChaptersBase: {fileID: 11400000, guid: cc7cae8f67c469645b67fde650c63b22, type: 2}
 --- !u!1 &1530293933
 GameObject:
   m_ObjectHideFlags: 0

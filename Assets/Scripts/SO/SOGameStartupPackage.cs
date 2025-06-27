@@ -29,7 +29,7 @@ public class SOGameStartupPackage : ScriptableObject
 
     public void RefreshRunMode(SOChaptersBase @base)
     {
-        switch (@base.Get(m_chapter).GetLevelState(m_level))
+        switch (@base.GetLevelState(m_chapter, m_level))
         {
             case ELevelState.Default: m_mode = EGameRunMode.Start; break;
             case ELevelState.Started: m_mode = EGameRunMode.Continue; break;

@@ -1,11 +1,15 @@
-using PlasticGui.WorkspaceWindow;
-using System.Data;
+using System.Collections.Generic;
 using UnityEngine;
+
+public enum ELevelState { Default, Started, Completed }
 
 [CreateAssetMenu(fileName = "SOChapters", menuName = "ScriptableObjects/Levels/SOChapters")]
 public class SOChaptersBase : ScriptableObject
 {
     [SerializeField] SOChapter[] chapters;
+
+    //meta data
+    Dictionary<(int, int), ELevelState> levelsMeta;
 
 
     public bool IsLoaded { get; set; }
@@ -29,17 +33,17 @@ public class SOChaptersBase : ScriptableObject
 
         for (int chapter = 0; chapter <= lastChapterIndex; chapter++)
         {
-            SOChapter chapterData = Get(chapter);
-            int level = chapterData.GetCurrentOrLastLevelPtr();
+            int level = GetLocalCurrentOrLastLevelPtr(chapter);
+            int chapterLastIndex = Get(chapter).GetLastIndex();
 
             //this is last level in last chapter
-            if (chapter == lastChapterIndex && level == chapterData.GetLastIndex())
+            if (chapter == lastChapterIndex && level == chapterLastIndex)
             {
                 return (chapter, level);
             }
 
             //this is not last level in this chapter
-            if (level < chapterData.GetLastIndex())
+            if (level < chapterLastIndex)
             {
                 return (chapter, level);
             }
@@ -52,6 +56,18 @@ public class SOChaptersBase : ScriptableObject
         return (lastChapterIndex, lastChapter.GetLastIndex());
     }
 
+    public int GetLocalCurrentOrLastLevelPtr(int chapter)
+    {
+        for (int ptr = 0; ptr < Size; ptr++)
+        {
+            if (GetLevelState(chapter, ptr) != ELevelState.Completed)
+            {
+                return ptr;
+            }
+        }
+
+        return Get(chapter).GetLastIndex();
+    }
 
 
     public (int, int) GetNextPtr(int chapter, int level)
@@ -91,18 +107,79 @@ public class SOChaptersBase : ScriptableObject
     }
 
 
-
-    public void SetDefault()
+    public ELevelState GetLevelState(int chapter, int level)
     {
-        for (int i = 0; i < Size; i++)
+        if (levelsMeta.TryGetValue((chapter, level), out ELevelState state))
         {
-            for (int j = 0; j < chapters.Get(i).Size; j++)
-            {
-                chapters.Get(i).SetLevelState(j, ELevelState.Default);
-            }
+            return state;
         }
 
-        IsLoaded = false;
+        return ELevelState.Default;
+    }
+
+    public void SetLevelState(int chapter, int level, ELevelState state)
+    {
+        if (chapter < 0 || chapter > GetLastIndex())
+        {
+            Debug.LogWarning("SO_CHAPTERS_BASE :: SET_STATE :: chapter index out of range");
+            return;
+        }
+
+        
+        if (level < 0 || level > Get(chapter).GetLastIndex())
+        {
+            Debug.LogWarning("SO_CHAPTERS_BASE :: SET_STATE :: level index out of range");
+            return;
+        }
+
+
+        (int, int) index = (chapter, level);
+
+        if (levelsMeta.ContainsKey(index))
+        {
+            levelsMeta[index] = state;
+        }
+        else
+        {
+            levelsMeta.Add(index, state);
+        }
+    }
+
+
+    //load and save
+
+    public void Load()
+    {
+        if (IsLoaded)
+        {
+            return;
+        }
+
+        levelsMeta = new Dictionary<(int, int), ELevelState>();
+
+        if (Serializer.LoadBin(PATH.GetDirectory(PATH.LEVELRUNMODE_FILE), out Struct_LevelBaseData data))
+        {
+            levelsMeta = data.levels_state_data;
+
+            Debug.Log("SOChaptersBase: Level base data loaded.");
+        }
+        else
+        {
+            Debug.Log("SOChaptersBase: Level base data set default.");
+        }
+
+        IsLoaded = true;
+    }
+
+    public void Save()
+    {
+        Struct_LevelBaseData dataCopy = new Struct_LevelBaseData();
+        dataCopy.levels_state_data = new Dictionary<(int, int), ELevelState>();
+        dataCopy.levels_state_data = this.levelsMeta;
+
+        dataCopy.SaveBin(PATH.GetDirectory(PATH.LEVELRUNMODE_FILE));
+
+        Debug.Log("LS_LevelsBase: LevelsBase saved.");
     }
 }
 

@@ -103,11 +103,7 @@ public class StatsViewPanel : MonoBehaviour
         if (mode == EPanelMode.LevelCompleted)
         {
             (int, int) levelPtr = levelManager.ActiveLevelPointer;
-
-            SOChapter chapter = SO_ChaptersBase.Get(levelPtr.Item1);
-            ELevelState state = chapter.GetLevelState(levelPtr.Item2);
-
-            chapter.SetLevelState(levelPtr.Item2, ELevelState.Completed);
+            SO_ChaptersBase.SetLevelState(levelPtr.Item1, levelPtr.Item2, ELevelState.Completed);
         }
 
 

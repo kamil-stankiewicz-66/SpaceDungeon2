@@ -4,15 +4,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SOWeaponBase", menuName = "ScriptableObjects/DataObjects/WeaponsBase")]
 public class SOWeaponsBase : ScriptableObject 
 {
-    [HideInInspector] public Dictionary<int, bool> weaponsStatusData;
     [SerializeField] private GameObject[] weapons;
-
+    
+    Dictionary<int, bool> weaponsStatusData;
+    
 
     public bool IsLoaded { get; set; }
 
 
     //only get
     
+    public Dictionary<int, bool> WeaponsStatusData 
+    {
+        get => weaponsStatusData; 
+    }
+
     public int WeaponsCount
     {
         get => weapons.Length;
@@ -66,24 +72,41 @@ public class SOWeaponsBase : ScriptableObject
         }
     }
 
-    public void WeaponsStatusDictionaryBuild()
+
+
+    //load and save
+
+    public void Load()
     {
-        if (weaponsStatusData != null)
+        if (IsLoaded)
         {
-            weaponsStatusData = null;
-            Debug.Log("SO_WeaponsBase: WeaponsStatusDictionary nullable");
+            return;
         }
 
         weaponsStatusData = new Dictionary<int, bool>();
-        for (short i = 0; i < weapons.Length; i++)
+
+        if (Serializer.LoadBin(PATH.GetDirectory(PATH.WEAPONSBASE_FILE), out Struct_WeaponsBaseData data))
         {
-            weaponsStatusData.Add(i, false);
+            this.weaponsStatusData = data.weaponsStatusData;
+            Debug.Log("SOWeaponsBase: Weapons base data loaded.");
         }
+        else
+        {
+            Debug.Log("SOWeaponsBase: Weapons base data set default.");
+        }
+
+        IsLoaded = true;
     }
 
-    public void SetDefault()
+    public void Save()
     {
-        weaponsStatusData = null;
-        IsLoaded = false;
+        Struct_WeaponsBaseData dataCopy = new Struct_WeaponsBaseData
+        {
+            weaponsStatusData = this.weaponsStatusData
+        };
+
+        dataCopy.SaveBin(PATH.GetDirectory(PATH.WEAPONSBASE_FILE));
+        Debug.Log("SOWeaponsBase: WeaponsBase saved.");
     }
+
 }
