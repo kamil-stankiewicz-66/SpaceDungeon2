@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
 
-public class WindowLevels : MonoBehaviour
+public class WindowLevels : MonoBehaviour, IWindow
 {
     [SerializeField] SOPlayerData SO_playerData;
     [SerializeField] SOGameStartupPackage SO_GameStartupPackage;
@@ -29,6 +29,11 @@ public class WindowLevels : MonoBehaviour
 
     [SerializeField] GameObject bar_play;
     [SerializeField] GameObject bar_locked;
+
+
+    //interface
+
+    public void Refresh() => RefreshWindow();
 
 
     //public
@@ -222,4 +227,5 @@ public class WindowLevels : MonoBehaviour
     {
         return SO_GameStartupPackage.Level < SO_Chapters.Get(SO_GameStartupPackage.Chapter).GetLastIndex();
     }
+
 }

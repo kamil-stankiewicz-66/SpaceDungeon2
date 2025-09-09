@@ -29,7 +29,7 @@ public class PlayerCore : Character
     {
         inputManager = FindAnyObjectByType<InputManager>();
 
-        if (inputManager == null) Debug.LogWarning("PLAYER_CONTROLLER :: health system is null");
+        if (inputManager == null) Debug.LogWarning("PLAYER_CONTROLLER :: input manager is null");
     }
 
 

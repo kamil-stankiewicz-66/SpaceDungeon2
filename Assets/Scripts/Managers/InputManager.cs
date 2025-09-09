@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     InputAction moveAction;
     InputAction analogAimAction;
     InputAction attackAction;
+    InputAction interactAction;
     InputAction healAction;
     InputAction pauseAction;
 
@@ -21,6 +22,8 @@ public class InputManager : MonoBehaviour
     public Vector2 MouseAimAxis { get; private set; }
 
     public bool AttackTrigger { get; private set; }
+
+    public bool InteractTrigger { get; private set; }
 
     public bool HealTrigger { get; private set; }
 
@@ -41,6 +44,7 @@ public class InputManager : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         analogAimAction = InputSystem.actions.FindAction("AnalogAim");
         attackAction = InputSystem.actions.FindAction("Attack");
+        interactAction = InputSystem.actions.FindAction("Interact");
         healAction = InputSystem.actions.FindAction("Heal");
         pauseAction = InputSystem.actions.FindAction("Pause");
     }
@@ -55,6 +59,7 @@ public class InputManager : MonoBehaviour
             MoveAxis = moveAction.ReadValue<Vector2>();
             AnalogAimAxis = analogAimAction.ReadValue<Vector2>();
             AttackTrigger = attackAction.IsPressed();
+            InteractTrigger = interactAction.IsPressed();
             HealTrigger = healAction.IsPressed();
             PauseTrigger = pauseAction.IsPressed();
         }
@@ -63,6 +68,7 @@ public class InputManager : MonoBehaviour
             MoveAxis = Vector2.zero;
             AnalogAimAxis = Vector2.zero;
             AttackTrigger = false;
+            InteractTrigger = false;
             HealTrigger = false;
             PauseTrigger = false;
         }

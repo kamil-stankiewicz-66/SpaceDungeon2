@@ -143,6 +143,10 @@ SpriteAtlas:
     - 17663ebe2b1c902448ade0f94780354a: 1262226430
     - 24d4a9fe7ad39ef499918ae48b6b3596: 1137330517
     - 24d4a9fe7ad39ef499918ae48b6b3596: 1353694261
+    - 7f4a8def2de4ccb44a92cc92dcdd4576: -1365963699
+    - 7f4a8def2de4ccb44a92cc92dcdd4576: -1614496956
+    - 7f4a8def2de4ccb44a92cc92dcdd4576: -1820299227
+    - 7f4a8def2de4ccb44a92cc92dcdd4576: -1852947005
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 1614761652, guid: 3f009851174ceb042967bc680fa118dc, type: 3}
@@ -238,6 +242,10 @@ SpriteAtlas:
   - {fileID: 1262226430, guid: 17663ebe2b1c902448ade0f94780354a, type: 3}
   - {fileID: 1137330517, guid: 24d4a9fe7ad39ef499918ae48b6b3596, type: 3}
   - {fileID: 1353694261, guid: 24d4a9fe7ad39ef499918ae48b6b3596, type: 3}
+  - {fileID: -1365963699, guid: 7f4a8def2de4ccb44a92cc92dcdd4576, type: 3}
+  - {fileID: -1614496956, guid: 7f4a8def2de4ccb44a92cc92dcdd4576, type: 3}
+  - {fileID: -1820299227, guid: 7f4a8def2de4ccb44a92cc92dcdd4576, type: 3}
+  - {fileID: -1852947005, guid: 7f4a8def2de4ccb44a92cc92dcdd4576, type: 3}
   m_PackedSpriteNamesToIndex:
   - wall_slime_shadow
   - wall_slime
@@ -332,6 +340,10 @@ SpriteAtlas:
   - floor_main
   - wall_broken_0
   - wall_broken_1
+  - gate_opened_down
+  - gate_closed_down
+  - gate_closed_up
+  - gate_opened_up
   m_RenderDataMap: {}
   m_Tag: Terrain
   m_IsVariant: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class WindowStore : MonoBehaviour
+public class WindowStore : MonoBehaviour, IWindow
 {
     [SerializeField] SOWeaponsBase so_weaponsBase;
     [SerializeField] SOPlayerData so_playerData;
@@ -33,6 +33,11 @@ public class WindowStore : MonoBehaviour
 
     private ItemStoreIcon[] icons;
     private ItemData selectedItem;
+
+
+    //interface
+
+    public void Refresh() { /*empty*/ }
 
 
     //public
@@ -270,7 +275,5 @@ public class WindowStore : MonoBehaviour
 
         public ItemStatus Status => _status;
     }
-
-
 
 }
