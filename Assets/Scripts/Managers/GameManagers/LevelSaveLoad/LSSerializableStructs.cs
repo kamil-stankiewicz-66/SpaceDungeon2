@@ -28,6 +28,12 @@ public struct Struct_Chest
 }
 
 [System.Serializable]
+public struct Struct_Interactable
+{
+    public int state;
+}
+
+[System.Serializable]
 public struct Struct_LevelMeta
 {
     public int storyCompleted;

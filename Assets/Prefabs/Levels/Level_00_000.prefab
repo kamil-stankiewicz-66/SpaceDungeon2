@@ -333,7 +333,7 @@ MonoBehaviour:
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
   m_PreviousShadowCastingSource: 2
-  m_PreviousShadowShape2DSource: {fileID: 5948983633452192499}
+  m_PreviousShadowShape2DSource: {fileID: 884751684401401675}
   references:
     version: 2
     RefIds:
@@ -700,6 +700,37 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1
+--- !u!1 &3605320780954798371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266674015927912377}
+  m_Layer: 0
+  m_Name: _Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266674015927912377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605320780954798371}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.36519, y: -0.23658, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5396627440501842932}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3885049849533766981
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +797,7 @@ Transform:
   - {fileID: 6597492897978113675}
   - {fileID: 6846008661685471180}
   - {fileID: 4349696816329620476}
+  - {fileID: 1266674015927912377}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5068258322955792101
@@ -780,10 +812,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab2d5b39aa364d4bb030f24a4807209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
-  storyActivitiesHolder: {fileID: 0}
-  enemiesHolder: {fileID: 0}
-  chestHolder: {fileID: 0}
+  spawnPoint: {fileID: 3793743750722716046}
+  storyActivitiesHolder: {fileID: 7989968785759006413}
+  enemiesHolder: {fileID: 8068140314565628890}
+  chestsHolder: {fileID: 8106962852093535724}
+  interactablesHolder: {fileID: 3605320780954798371}
 --- !u!1 &7989968785759006413
 GameObject:
   m_ObjectHideFlags: 0

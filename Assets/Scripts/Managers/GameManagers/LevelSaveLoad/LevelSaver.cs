@@ -66,6 +66,7 @@ public class LevelSaver : MonoBehaviour
                 Save_StoryActivities();
                 Save_Enemies();
                 Save_Chests();
+                Save_Interactables();
                 Save_LevelMeta();
                 systemLogCaller.ShowLog("Level saved.");
                 break;
@@ -77,6 +78,7 @@ public class LevelSaver : MonoBehaviour
                 Save_StoryActivities(false);
                 Save_Enemies(false);
                 Save_Chests();
+                Save_Interactables(false);
                 Save_LevelMeta(0, 0, null);
                 systemLogCaller.ShowLog("Level saved.");
                 break;
@@ -96,6 +98,7 @@ public class LevelSaver : MonoBehaviour
                 Save_StoryActivities();
                 Save_Enemies();
                 Save_Chests();
+                Save_Interactables();
                 Save_LevelMeta();
                 systemLogCaller.ShowLog("Level saved.");
                 break;
@@ -140,7 +143,7 @@ public class LevelSaver : MonoBehaviour
         print("LevelSaver: num of existing story activities " + levelManager.ActiveLevel.StoryActivitiesCount);
 
         //story
-        for (ushort i = 0; i < levelManager.ActiveLevel.StoryActivitiesCount; i++)
+        for (int i = 0; i < levelManager.ActiveLevel.StoryActivitiesCount; i++)
         {
             StoryActivity storyActivity = levelManager.ActiveLevel.StoryActivities[i];
             Struct_StroryActivity data = new Struct_StroryActivity
@@ -216,7 +219,7 @@ public class LevelSaver : MonoBehaviour
         print("LevelSaver: num of existing chests " + levelManager.ActiveLevel.ChestsCount);
 
         //chests
-        for (ushort i = 0; i < levelManager.ActiveLevel.ChestsCount; i++)
+        for (int i = 0; i < levelManager.ActiveLevel.ChestsCount; i++)
         {
             ChestCore chest = levelManager.ActiveLevel.Chests[i];
             Struct_Chest data = new Struct_Chest
@@ -230,6 +233,38 @@ public class LevelSaver : MonoBehaviour
                 levelManager.ActiveLevelPointer.Item1.ToString(),
                 levelManager.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_CHESTS_FOLDER, i.ToString() 
+            });
+
+            data.SaveBin(_path);
+
+            //make error
+            if (!save)
+            {
+                int _i = -1;
+                _i.SaveBin(_path);
+            }
+        }
+    }
+
+    private void Save_Interactables(bool save = true)
+    {
+        print("LevelSaver: num of existing interactables " + levelManager.ActiveLevel.InteractablesCount);
+
+        //interactables
+        for (int i = 0; i < levelManager.ActiveLevel.InteractablesCount; i++)
+        {
+            InteractableObject interactable = levelManager.ActiveLevel.Interactables[i];
+            Struct_Interactable data = new Struct_Interactable
+            {
+                state = interactable.State,
+            };
+
+            string _path = PATH.GetDirectory(new string[]
+            {
+                PATH.LEVELS_FOLDER,
+                levelManager.ActiveLevelPointer.Item1.ToString(),
+                levelManager.ActiveLevelPointer.Item2.ToString(),
+                PATH.LEVELS_INTERACTABLES_FOLDER, i.ToString()
             });
 
             data.SaveBin(_path);

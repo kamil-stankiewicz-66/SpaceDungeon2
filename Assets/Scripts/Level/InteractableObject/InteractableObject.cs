@@ -4,17 +4,33 @@ using UnityEngine.Events;
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] GameObject interactInfoBar;
-    [SerializeField] UnityEvent interactionEvent;
+    [SerializeField] UnityEvent[] interactionEvents;
+    [SerializeField] bool isSingleUse;
 
     InputManager inputManager;
     new Collider2D collider;
 
 
+    //state
+    int _state = -1;
+    public int State 
+    {  
+        get => _state;
+        set
+        {
+            _state = value;
+
+            if (_state >= interactionEvents.Length)
+                _state = 0;
+
+            InvokeInteraction(_state);
+        }
+    }
+
 
     //flag
-    bool m_isInteractionCompleted;
-    
-    public bool IsTriggeredByPlayer { get; private set; }
+    bool m_isTriggeredByPlayer;
+    bool m_active; //anti loop activation
 
 
 
@@ -53,11 +69,15 @@ public class InteractableObject : MonoBehaviour
         if (!collision.gameObject.TryGetComponent<PlayerCore>(out _))
             return;
 
-        if (m_isInteractionCompleted)
-            return;
-
-        IsTriggeredByPlayer = trigger;
-        interactInfoBar?.SetActive(trigger);
+        if (IsInteractionAllowed())
+        {
+            m_isTriggeredByPlayer = trigger;
+            interactInfoBar?.SetActive(trigger);
+        }
+        else
+        {
+            m_isTriggeredByPlayer = false;
+        }
     }
 
 
@@ -66,15 +86,44 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        if (!IsTriggeredByPlayer)
+        if (!m_isTriggeredByPlayer || 
+            !inputManager.InteractTrigger)
+        {
+            m_active = false; //anti loop activation
+            return;
+        }
+
+
+        //anti loop activation
+        if (m_active)
             return;
 
-        //interact
-        if (inputManager.InteractTrigger)
-        {
-            interactionEvent?.Invoke();
-            interactInfoBar?.SetActive(false);
-            m_isInteractionCompleted = true;
-        }
+        m_active = true;
+
+
+        //call interaction
+        State++;        
+
+
+        //bar
+        interactInfoBar?.SetActive(IsInteractionAllowed());
+    }
+
+
+
+    //helpers
+
+    bool IsInteractionAllowed()
+    {
+        return !isSingleUse || State == 0;
+    }
+
+    void InvokeInteraction(int state)
+    {
+        if (state < 0)
+            return;
+
+        if (interactionEvents.Length != 0)
+            interactionEvents[State]?.Invoke();
     }
 }

@@ -8,6 +8,7 @@ public class LevelLoader : MonoBehaviour
         LoadStory(lm, levelData, runMode);
         LoadEnemies(lm, levelData, runMode);
         LoadChests(lm, levelData, runMode);
+        LoadInteractables(lm, levelData, runMode);
     }
 
     void LoadPlayer(LevelManager lm, LevelData levelData, EGameRunMode runMode)
@@ -211,6 +212,48 @@ public class LevelLoader : MonoBehaviour
                         chest.IsLooted = false;
                     }
                     chest.IsRespawnedInMaxingMode = chest.IsLooted;
+                    break;
+                }
+            }
+        }
+    }
+
+    void LoadInteractables(LevelManager lm, LevelData levelData, EGameRunMode runMode)
+    {
+        //interactables
+        for (int i = 0; i < levelData.Interactables.Length; i++)
+        {
+            InteractableObject interactable = levelData.Interactables[i];
+
+            string _path = PATH.GetDirectory(new string[]
+            {
+                PATH.LEVELS_FOLDER,
+                lm.ActiveLevelPointer.Item1.ToString(),
+                lm.ActiveLevelPointer.Item2.ToString(),
+                PATH.LEVELS_INTERACTABLES_FOLDER,
+                i.ToString()
+            });
+
+            switch (runMode)
+            {
+                case EGameRunMode.Start:
+                case EGameRunMode.Maxing:
+                {
+                    interactable.State = -1;
+                    break;
+                }
+
+                case EGameRunMode.Continue:
+                {
+                    if (Serializer.LoadBin(_path, out Struct_Interactable interactableData))
+                    {
+                        interactable.State = interactableData.state;
+                    }
+                    else
+                    {
+                        interactable.State = -1;
+                    }
+
                     break;
                 }
             }

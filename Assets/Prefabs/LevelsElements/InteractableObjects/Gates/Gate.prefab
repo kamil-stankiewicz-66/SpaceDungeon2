@@ -606,7 +606,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0008634627, y: -0.2309351}
+  m_Offset: {x: -0.00000017881393, y: -0.2309351}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -616,7 +616,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5922015, y: 1.5381298}
+  m_Size: {x: 1.967419, y: 1.5381298}
   m_EdgeRadius: 0
 --- !u!114 &3424159210408612449
 MonoBehaviour:
@@ -665,8 +665,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 0.0008621216, y: -0.23094177, z: 0}
-      m_Extent: {x: 0.7960892, y: 0.7690582, z: 0}
+      m_Center: {x: 0, y: -0.23094177, z: 0}
+      m_Extent: {x: 0.9837036, y: 0.7690582, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0
@@ -776,9 +776,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3846913588998077879, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: m_text
+      value: Gate
+      objectReference: {fileID: 0}
     - target: {fileID: 4992149592048860515, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
       propertyPath: m_Name
       value: Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: isSingleUse
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
       propertyPath: interactionEvent.m_PersistentCalls.m_Calls.Array.size
@@ -797,9 +809,33 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
       propertyPath: interactionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Open
       objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 78798796675751803}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 78798796675751803}
     - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
       propertyPath: interactionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GateCore, GameSource
@@ -809,7 +845,39 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GateCore, GameSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GateCore, GameSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
       propertyPath: interactionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862812325413704384, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}
+      propertyPath: interactionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5882394192041834675, guid: c1b7c70923fce66449f0e724b57cdfd9, type: 3}

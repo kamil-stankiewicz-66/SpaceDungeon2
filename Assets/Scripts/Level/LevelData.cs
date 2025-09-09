@@ -8,12 +8,14 @@ public class LevelData : MonoBehaviour
     //holders
     [SerializeField] GameObject storyActivitiesHolder;
     [SerializeField] GameObject enemiesHolder;
-    [SerializeField] GameObject chestHolder;
+    [SerializeField] GameObject chestsHolder;
+    [SerializeField] GameObject interactablesHolder;
 
     //ram
     private StoryActivity[] storyActivities;
     private EntityCore[] enemies;
     private ChestCore[] chests;
+    private InteractableObject[] interactables;
 
     private void Awake()
     {
@@ -31,12 +33,16 @@ public class LevelData : MonoBehaviour
         if (enemiesHolder == null)
             enemiesHolder = GameObject.FindGameObjectWithTag(TAG.LEVEL_DATA_ENEMIES);
 
-        if (chestHolder == null)
-            chestHolder = GameObject.FindGameObjectWithTag(TAG.LEVEL_CHESTS);
+        if (chestsHolder == null)
+            chestsHolder = GameObject.FindGameObjectWithTag(TAG.LEVEL_CHESTS);
+
+        if (interactablesHolder == null)
+            interactablesHolder = GameObject.FindGameObjectWithTag(TAG.LEVEL_INTERACTABLE_OBJECTS);
 
         enemies = enemiesHolder.transform.GetComponentsInChildren<EntityCore>();
         storyActivities = storyActivitiesHolder.transform.GetComponentsInChildren<StoryActivity>();
-        chests = chestHolder.transform.GetComponentsInChildren<ChestCore>();
+        chests = chestsHolder.transform.GetComponentsInChildren<ChestCore>();
+        interactables = interactablesHolder.GetComponentsInChildren<InteractableObject>();
     }
 
 
@@ -221,4 +227,30 @@ public class LevelData : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// interactables
+    /// </summary>
+
+    public InteractableObject[] Interactables
+    {
+        get
+        {
+            if (chests == null)
+                return new InteractableObject[0];
+
+            return interactables;
+        }
+    }
+
+    public int InteractablesCount
+    {
+        get
+        {
+            if (interactables == null)
+                return 0;
+
+            return interactables.Length;
+        }
+    }
 }

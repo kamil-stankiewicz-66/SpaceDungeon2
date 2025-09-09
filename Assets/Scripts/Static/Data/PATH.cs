@@ -18,6 +18,7 @@ public static class PATH
     public static string LEVELS_STORYACTIVITY_FOLDER = "story";
     public static string LEVELS_ENEMIES_FOLDER = "enemies";
     public static string LEVELS_CHESTS_FOLDER = "chests";
+    public static string LEVELS_INTERACTABLES_FOLDER = "interactables";
     public static string LEVELS_META_FILE = "meta";
 
 
