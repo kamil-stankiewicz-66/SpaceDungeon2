@@ -10,7 +10,8 @@ public struct Struct_LevelBaseData
 [System.Serializable]
 public struct Struct_PlayerData
 {
-    public int weaponNr;
+    public string activeItem;
+    public List<string> equipment;
     public int coins;
     public int exp;
 }
@@ -25,7 +26,7 @@ public struct Struct_WeaponsBaseData
 public class LSDataObjects : MonoBehaviour
 {
     [SerializeField] SOPlayerData SO_PlayerData;
-    [SerializeField] SOWeaponsBase SO_WeaponsBase;
+    //[SerializeField] SOWeaponsBase SO_WeaponsBase;
     [SerializeField] SOChaptersBase SO_ChaptersBase;
 
     static GameObject instance;
@@ -47,7 +48,7 @@ public class LSDataObjects : MonoBehaviour
         //load data objects
 
         SO_PlayerData.Load();
-        SO_WeaponsBase.Load();
+        //SO_WeaponsBase.Load();
         SO_ChaptersBase.Load();
     }
 
@@ -64,14 +65,14 @@ public class LSDataObjects : MonoBehaviour
         //save data objects
 
         SO_PlayerData.Save();
-        SO_WeaponsBase.Save();
+        //SO_WeaponsBase.Save();
         SO_ChaptersBase.Save();
 
 
         //reset flags
 
         SO_PlayerData.IsLoaded = false;
-        SO_WeaponsBase.IsLoaded = false;
+        //SO_WeaponsBase.IsLoaded = false;
         SO_ChaptersBase.IsLoaded = false;
     }
 }

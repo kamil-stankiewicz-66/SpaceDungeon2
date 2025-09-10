@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0255aceb890aae149b5a054d45b995d3, type: 3}
+  m_Name: Fists
+  m_EditorClassIdentifier: 
+  id: 2cf2e08e-cb14-4aa2-8d7b-f4e51b2ddc34
+  itemType: 2
+  itemName: Fists
+  icon: {fileID: 0}
+  item: {fileID: 5285435775110977188, guid: b63a68a4d87254b4d86733c1bad2b706, type: 3}
+  coinsValue: 0

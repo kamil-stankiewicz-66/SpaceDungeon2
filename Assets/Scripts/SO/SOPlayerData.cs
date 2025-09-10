@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SOPlayerData", menuName = "ScriptableObjects/DataObjects/SOPlayerData")]
@@ -6,8 +7,9 @@ public class SOPlayerData : ScriptableObject
     [SerializeField] SOParameters so_parameters;
 
     [SerializeField] int exp;
-    [SerializeField] int weaponID;
     [SerializeField] int coins;
+    [SerializeField] string activeItem;
+    [SerializeField] List<string> equipment;
 
 
     public bool IsLoaded { get; set; }
@@ -20,14 +22,19 @@ public class SOPlayerData : ScriptableObject
         get => exp;
     }
 
-    public int WeaponID
-    {
-        get => weaponID;
-    }
-
     public int Coins
     {
         get => coins;
+    }
+
+    public string ActiveItem
+    {
+        get => activeItem;
+    }
+
+    public List<string> Equipment
+    {
+        get => equipment;
     }
 
     public int ExpLevel
@@ -53,9 +60,11 @@ public class SOPlayerData : ScriptableObject
         this.exp += exp;
     }
 
-    public void AddCoins(int value)
+    public void AddCoins(int value) => SetCoins(this.coins += value);
+
+    public void SetCoins(int value)
     {
-        this.coins += value;
+        this.coins = value;
 
         if (this.coins < 0)
         {
@@ -63,14 +72,14 @@ public class SOPlayerData : ScriptableObject
         }
     }
 
-    public void SetWeaponID(int weaponID)
+    public void SetActiveItem(string id)
     {
-        this.weaponID = weaponID;
+        this.activeItem = id;
+    }
 
-        if (this.weaponID < -1)
-        {
-            this.weaponID = -1;
-        }
+    public void SetEquipment(List<string> ids)
+    {
+        this.equipment = ids;
     }
 
 
@@ -85,7 +94,8 @@ public class SOPlayerData : ScriptableObject
 
         if (Serializer.LoadBin(PATH.GetDirectory(PATH.PLAYERDATA_FILE), out Struct_PlayerData data))
         {
-            weaponID = data.weaponNr;
+            activeItem = data.activeItem;
+            equipment = data.equipment;
             coins = data.coins;
             exp = data.exp;
 
@@ -94,7 +104,8 @@ public class SOPlayerData : ScriptableObject
         else
         {
             exp = 0;
-            weaponID = -1;
+            activeItem = "";
+            equipment.Clear();
             coins = 0;
 
             Debug.Log("SOPlayerData: Player data set default");
@@ -107,7 +118,8 @@ public class SOPlayerData : ScriptableObject
     {
         Struct_PlayerData dataCopy = new Struct_PlayerData()
         {
-            weaponNr = WeaponID,
+            activeItem = ActiveItem,
+            equipment = Equipment,
             coins = Coins,
             exp = Exp
         };

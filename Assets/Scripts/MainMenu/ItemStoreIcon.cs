@@ -15,16 +15,20 @@ public class ItemStoreIcon : MonoBehaviour
     ColorBlock clicked_colorBlock;
     bool isClicked;
 
-    UnityAction<int> unityAction;
-    int id;
+    UnityAction<SOItemData> unityAction;
+    SOItemData itemData;
+
+
+    public SOItemData ItemData { get => itemData; }
+
 
     //public
 
     internal void Set(Sprite _icon,
                           string _name,
                           bool _visible,
-                          int _id,
-                          UnityAction<int> _unityAction)
+                          SOItemData _id,
+                          UnityAction<SOItemData> _unityAction)
     {
         icon.sprite = _icon;
         
@@ -34,7 +38,7 @@ public class ItemStoreIcon : MonoBehaviour
         }
 
         text_weaponName.text = _name;
-        id = _id;
+        itemData = _id;
 
         unLockedHolder.SetActive(_visible);
         lockedHolder.SetActive(!_visible);
@@ -68,7 +72,7 @@ public class ItemStoreIcon : MonoBehaviour
 
     public void OnClickButton()
     {
-        unityAction?.Invoke(id);
+        unityAction?.Invoke(itemData);
     }
 
 

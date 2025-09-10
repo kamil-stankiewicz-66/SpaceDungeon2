@@ -5,6 +5,7 @@ public abstract class Weapon : Item
     [SerializeField] float attackTimeOut;
     [SerializeField] float range;
     [SerializeField] float damage;
+    [SerializeField] int requiredExpLevel;
 
     protected Animator animator;
     protected const string ANIM = "Attack";
@@ -21,6 +22,8 @@ public abstract class Weapon : Item
     public float Range { get => range; }
 
     public float Damage { get => damage; }
+
+    public int RequiredExpLevel { get => requiredExpLevel; }
 
 
 

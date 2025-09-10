@@ -44,12 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42139e2251ff6498616e59430fb284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 2
-  itemName: Fists
-  icon: {fileID: 0}
-  price: 0
-  requiredExpLevel: 0
-  animator: {fileID: 0}
+  data: {fileID: 11400000, guid: 397bb30613c07674f87e1ade07368836, type: 2}
   attackTimeOut: 3000
   range: 1.5
   damage: 25
+  requiredExpLevel: 0

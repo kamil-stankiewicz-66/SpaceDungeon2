@@ -105,6 +105,8 @@ public class LevelSaver : MonoBehaviour
             }
         }
 
+        SyncEquipment();
+
         print("LevelSaver: Level saved in save mode: " + SaveMode);
     }
 
@@ -136,6 +138,12 @@ public class LevelSaver : MonoBehaviour
             int _i = -1;
             _i.SaveBin(_path);
         }
+    }
+
+    private void SyncEquipment()
+    {
+        levelManager.SO_playerData.SetCoins(player.EquipmentSystem.Coins);
+        levelManager.SO_playerData.SetEquipment(player.EquipmentSystem.GetIDList());
     }
 
     private void Save_StoryActivities(bool save = true)

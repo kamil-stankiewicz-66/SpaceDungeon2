@@ -58,7 +58,7 @@ public class WindowLevels : MonoBehaviour, IWindow
 
     public void ButtonPlay()
     {
-        if (SO_playerData.WeaponID < 0)
+        if (SO_playerData.ActiveItem == string.Empty)
         {
             notificationCaller.Show("You don't have any weapon\nGo to the store and prepere for battle!");
             return;

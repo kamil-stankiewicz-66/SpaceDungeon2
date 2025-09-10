@@ -5,7 +5,7 @@ public class LevelManager : MonoBehaviour
     public static bool isGameLoading = true;
 
     public SOPlayerData SO_playerData;
-    public SOWeaponsBase SO_weaponBase;
+    public SOItemRegistry SO_itemRegistry;
     public SOGameStartupPackage SO_GameStartupPackage;
     public SOChaptersBase SO_Chapters;
 

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61eb64fde3354914cbd4ecbe4cafa4fd, type: 3}
-  m_Name: SOWeaponsBase
+  m_Script: {fileID: 11500000, guid: e44aa9f6e50a6f04eb1b15a007155e33, type: 3}
+  m_Name: SOItemRegistry
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 1296633490770606646, guid: cef576a48abfcdf49844d93227d4bafb, type: 3}
+  registry:
+  - {fileID: 11400000, guid: 8f5eaac6e04f4ec47b1f7df69427d720, type: 2}

@@ -4,16 +4,17 @@ using UnityEngine;
 [System.Serializable]
 public struct ItemEntry
 {
-    public Item item;
+    public SOItemData item;
     public uint amount;
 }
 
 public class EquipmentSystem : MonoBehaviour
 {
     [SerializeField] GameObject hand;
-    [SerializeField] bool autoLoot;
     [SerializeField] Item activeItem;
     [SerializeField] List<ItemEntry> equipment;
+    [SerializeField] int coins;
+    //[SerializeField] bool autoLoot;
 
 
     public Item ActiveItem
@@ -22,11 +23,37 @@ public class EquipmentSystem : MonoBehaviour
         private set => activeItem = value;
     }
 
+    public List<string> GetIDList()
+    {
+        var temp = new List<string>();
+        foreach (ItemEntry item in equipment)
+        {
+            for (int i = 0; i < item.amount; i++)
+                temp.Add(item.item.ID);
+        }
+
+        return temp;
+    }
+
+    public int Coins { get => coins;}
+
+    public void AddCoins(int value) => SetCoins(this.coins += value);
+
+    public void SetCoins(int value)
+    {
+        this.coins = value;
+
+        if (this.coins < 0)
+        {
+            this.coins = 0;
+        }
+    }
+
 
 
     //add and remove item
 
-    public void AddItemToEquipment(Item item, uint amount = 1u)
+    public void AddItemToEquipment(SOItemData item, uint amount = 1u)
     {
         if (amount == 0)
         {
@@ -34,7 +61,7 @@ public class EquipmentSystem : MonoBehaviour
         }
 
 
-        int index = equipment.FindIndex(e => e.item == item);
+        int index = equipment.FindIndex(e => e.item.ID == item.ID);
 
         if (index < 0)
         {
@@ -48,7 +75,7 @@ public class EquipmentSystem : MonoBehaviour
         equipment[index] = updated;
     }
 
-    public void RemoveItemFromEquipment(Item item, uint amount = 1u)
+    public void RemoveItemFromEquipment(SOItemData item, uint amount = 1u)
     {
         if (amount == 0)
         {
@@ -56,7 +83,7 @@ public class EquipmentSystem : MonoBehaviour
         }
 
 
-        int index = equipment.FindIndex(e => e.item == item);
+        int index = equipment.FindIndex(e => e.item.ID == item.ID);
 
         if (index < 0)
         {
@@ -119,21 +146,21 @@ public class EquipmentSystem : MonoBehaviour
 
     public void HideActiveItem()
     {
-        AddItemToEquipment(ActiveItem);
+        //AddItemToEquipment(ActiveItem);
         ActiveItem = null;
     }
 
-    public void SetActiveItemFromEquipment(Item item)
-    {
-        RemoveItemFromEquipment(item);
-        SetActiveItem(item);
-    }
+    //public void SetActiveItemFromEquipment(Item item)
+    //{
+    //    RemoveItemFromEquipment(item);
+    //    SetActiveItem(item);
+    //}
 
-    public void SetActiveItemFromEquipment(int index)
-    {
-        ItemEntry itemEntry = equipment.Get(index);
-        SetActiveItemFromEquipment(itemEntry.item);
-    }
+    //public void SetActiveItemFromEquipment(int index)
+    //{
+    //    ItemEntry itemEntry = equipment.Get(index);
+    //    SetActiveItemFromEquipment(itemEntry.item);
+    //}
 
 
 
@@ -144,22 +171,22 @@ public class EquipmentSystem : MonoBehaviour
         SetActiveItem(ActiveItem);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!autoLoot)
-        {
-            return;
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (!autoLoot)
+    //    {
+    //        return;
+    //    }
 
-        if (collision == null)
-        {
-            return;
-        }
+    //    if (collision == null)
+    //    {
+    //        return;
+    //    }
 
-        if (collision.TryGetComponent(out Item item))
-        {
-            AddItemToEquipment(item);
-        }
-    }
+    //    if (collision.TryGetComponent(out Item item))
+    //    {
+    //        AddItemToEquipment(item);
+    //    }
+    //}
 
 }

@@ -3842,7 +3842,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2082775695}
-        m_TargetAssemblyTypeName: WindowStore, GameSource
+        m_TargetAssemblyTypeName: WindowItemStore, GameSource
         m_MethodName: Use
         m_Mode: 1
         m_Arguments:
@@ -10889,7 +10889,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SO_PlayerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
-  SO_WeaponsBase: {fileID: 11400000, guid: 2834ba5bfcacf344a9f39dae9430fdc9, type: 2}
   SO_ChaptersBase: {fileID: 11400000, guid: cc7cae8f67c469645b67fde650c63b22, type: 2}
 --- !u!1 &1530293933
 GameObject:
@@ -14689,16 +14688,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2082775691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd617dc8680b69a498aba971e7a186fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 789454c474793004987ca3d337b3eb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  so_weaponsBase: {fileID: 11400000, guid: 2834ba5bfcacf344a9f39dae9430fdc9, type: 2}
-  so_playerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
+  SOItemRegistry: {fileID: 11400000, guid: bb0285fe22cf78246857b657a27690b7, type: 2}
+  SOPlayerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
   notificationCaller: {fileID: 151194243}
   dialogWindowCaller: {fileID: 151194244}
-  scrollbar: {fileID: 1829701279}
-  weaponsIconsHolder: {fileID: 740994337}
-  weaponIconPrefab: {fileID: 4881284687417205596, guid: e670baa1081c31d46ac60e3f3ecd42cf, type: 3}
+  scrollbar: {fileID: 0}
+  iconsHolder: {fileID: 740994337}
+  iconPrefab: {fileID: 4881284687417205596, guid: e670baa1081c31d46ac60e3f3ecd42cf, type: 3}
   text_coins: {fileID: 1247873791}
   text_weapon_name: {fileID: 610865608}
   text_weapon_weaponType: {fileID: 6475062}
@@ -15057,8 +15056,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2082775695}
-        m_TargetAssemblyTypeName: WindowStore, GameSource
-        m_MethodName: Buy
+        m_TargetAssemblyTypeName: WindowItemStore, GameSource
+        m_MethodName: BuyItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

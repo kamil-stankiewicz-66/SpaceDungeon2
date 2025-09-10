@@ -4,10 +4,10 @@ using System.Linq;
 
 public class ChestCore : MonoBehaviour
 {
-    [SerializeField] SOPlayerData SO_playerData;
     [SerializeField] SOChestType SO_chestType;
     [SerializeField] int coinsInChest;
 
+    private PlayerCore playerCore;
     private SystemLogCaller systemLogCaller; 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -39,9 +39,15 @@ public class ChestCore : MonoBehaviour
 
     private void OnEnable()
     {
+        playerCore = GameObject.FindFirstObjectByType<PlayerCore>();
         systemLogCaller = GameObject.FindGameObjectWithTag(TAG.SYSTEM_LOG_CALLER).GetComponent<SystemLogCaller>();
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (playerCore == null) Debug.LogWarning("CHEST_CORE :: player core is null");
+        if (systemLogCaller == null) Debug.LogWarning("CHEST_CORE :: systemLogCaller is null");
+        if (animator == null) Debug.LogWarning("CHEST_CORE :: animator is null");
+        if (spriteRenderer == null) Debug.LogWarning("CHEST_CORE :: spriteRenderer is null");
 
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips.Where(clip => clip.name == ANIM_TRIGGER))
         {
@@ -75,7 +81,7 @@ public class ChestCore : MonoBehaviour
         animator?.Play(ANIM_OPEN);
 
         //empty
-        SO_playerData.AddCoins(coinsInChest);
+        playerCore.EquipmentSystem.AddCoins(coinsInChest);
         systemLogCaller?.ShowLog($"+{coinsInChest} coins");
     }
 
