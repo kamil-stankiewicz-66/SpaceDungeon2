@@ -4496,8 +4496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59c95035b05f3a4cb82b12ed643a32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SO_playerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
-  SO_itemRegistry: {fileID: 11400000, guid: bb0285fe22cf78246857b657a27690b7, type: 2}
+  SO_PlayerData: {fileID: 11400000, guid: ab09059af8cacdd40b797a06cb3f6f16, type: 2}
+  SO_ItemRegistry: {fileID: 11400000, guid: bb0285fe22cf78246857b657a27690b7, type: 2}
   SO_GameStartupPackage: {fileID: 11400000, guid: c68be7ffadabb58439340f96b6e86bd4, type: 2}
   SO_Chapters: {fileID: 11400000, guid: cc7cae8f67c469645b67fde650c63b22, type: 2}
   levelHolder: {fileID: 526871137}
@@ -5701,9 +5701,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 7701178027180711775}
-  autoLoot: 0
   activeItem: {fileID: 0}
   equipment: []
+  coins: 0
 --- !u!1 &8496998084091791543
 GameObject:
   m_ObjectHideFlags: 0

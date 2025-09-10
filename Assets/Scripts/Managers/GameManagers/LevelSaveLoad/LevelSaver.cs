@@ -142,8 +142,8 @@ public class LevelSaver : MonoBehaviour
 
     private void SyncEquipment()
     {
-        levelManager.SO_playerData.SetCoins(player.EquipmentSystem.Coins);
-        levelManager.SO_playerData.SetEquipment(player.EquipmentSystem.GetIDList());
+        levelManager.SO_PlayerData.SetCoins(player.EquipmentSystem.Coins);
+        levelManager.SO_PlayerData.SetEquipment(player.EquipmentSystem.GetIDList());
     }
 
     private void Save_StoryActivities(bool save = true)

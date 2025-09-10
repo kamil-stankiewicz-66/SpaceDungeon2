@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public string bulletTag;
+    public bool isPlayerBullet;
     public float bulletDamage;
     public float bulletSpeed;
     public GameObject particleEffect;
@@ -53,10 +53,16 @@ public class Bullet : MonoBehaviour
 
     bool SkipCollision(Collider2D collision)
     {
-        return
-            collision == null ||
-            collision.CompareTag(bulletTag) ||
-            collision.CompareTag(TAG.NOT_BULLET_COLLIDING);
+        if (collision == null || collision.CompareTag(TAG.NOT_BULLET_COLLIDING))
+            return true;
+
+        if (isPlayerBullet && collision.CompareTag(TAG.PLAYER))
+            return true;
+
+        if (!isPlayerBullet && collision.CompareTag(TAG.ENEMY))
+            return true;
+
+        return false;
     }
 
 

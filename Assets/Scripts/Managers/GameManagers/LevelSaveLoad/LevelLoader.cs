@@ -18,18 +18,22 @@ public class LevelLoader : MonoBehaviour
         PlayerHealthSystem playerHealthSystem = player.gameObject.GetComponent<PlayerHealthSystem>();
 
         //player default
-        playerHealthSystem.Health = lm.SO_playerData.Health;
-        playerHealthSystem.HealPoints = lm.SO_playerData.Health;
+        playerHealthSystem.Health = lm.SO_PlayerData.Health;
+        playerHealthSystem.HealPoints = lm.SO_PlayerData.Health;
         player.transform.position = levelData.Spawnpoint;
 
         //load eq
-        player.EquipmentSystem.SetActiveItem(lm.SO_itemRegistry.Get(lm.SO_playerData.ActiveItem).Item);
-        foreach (string itemID in lm.SO_playerData.Equipment)
+        player.EquipmentSystem.SetActiveItem(lm.SO_ItemRegistry.Get(lm.SO_PlayerData.ActiveItem).Item);
+        foreach (string itemID in lm.SO_PlayerData.Equipment)
         {
-            player.EquipmentSystem.AddItemToEquipment(lm.SO_itemRegistry.Get(itemID));
+            player.EquipmentSystem.AddItemToEquipment(lm.SO_ItemRegistry.Get(itemID));
         }
         
-        player.EquipmentSystem.SetCoins(lm.SO_playerData.Coins);
+        player.EquipmentSystem.SetCoins(lm.SO_PlayerData.Coins);
+
+        //bonus to weapon damage
+        Weapon _w = player.EquipmentSystem.ActiveItem as Weapon;
+        _w.AddBonusDamage(lm.SO_PlayerData.Damage);
 
         //player
         switch (runMode)

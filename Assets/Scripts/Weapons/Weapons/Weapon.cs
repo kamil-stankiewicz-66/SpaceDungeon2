@@ -27,6 +27,15 @@ public abstract class Weapon : Item
 
 
 
+    //damage
+
+    public void AddBonusDamage(float value)
+    {
+        damage += value;
+    }
+
+
+
     //abstract aim
 
     public abstract void Aim(Vector2 target);

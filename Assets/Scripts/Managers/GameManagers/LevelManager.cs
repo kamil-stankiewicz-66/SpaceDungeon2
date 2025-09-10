@@ -4,8 +4,8 @@ public class LevelManager : MonoBehaviour
 {
     public static bool isGameLoading = true;
 
-    public SOPlayerData SO_playerData;
-    public SOItemRegistry SO_itemRegistry;
+    public SOPlayerData SO_PlayerData;
+    public SOItemRegistry SO_ItemRegistry;
     public SOGameStartupPackage SO_GameStartupPackage;
     public SOChaptersBase SO_Chapters;
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7246636713296260835}
   m_Layer: 0
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5517837265843734156}
   m_Layer: 0
   m_Name: hand
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,9 +325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 5890508743967071337}
-  autoLoot: 0
   activeItem: {fileID: 0}
   equipment: []
+  coins: 0
 --- !u!114 &6812280605296647275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
