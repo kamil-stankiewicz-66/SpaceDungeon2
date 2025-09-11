@@ -42,7 +42,7 @@ public class WindowItemStore : MonoBehaviour
     private void OnEnable()
     {
         //load all weapons
-        SOItemData[] weapons = SOItemRegistry.Registry.Where(item => item.Item as Weapon != null).ToArray();
+        SOItemData[] weapons = SOItemRegistry.Registry.Where(item => item.Core as Weapon != null).ToArray();
 
 
         //deafault selection
@@ -87,7 +87,7 @@ public class WindowItemStore : MonoBehaviour
         if (SOPlayerData.Equipment.Contains(data.ID))
             return ItemStatus.Use;
 
-        Weapon weapon = data.Item as Weapon;
+        Weapon weapon = data.Core as Weapon;
         if (weapon != null && weapon.RequiredExpLevel > SOPlayerData.ExpLevel)
         {
             return ItemStatus.Locked;
@@ -153,7 +153,7 @@ public class WindowItemStore : MonoBehaviour
         text_coins.text = SOPlayerData.Coins.ToString();
         text_weapon_price.text = $"{m_selectedItem.CoinsValue} coins";
 
-        Weapon _core = m_selectedItem.Item as Weapon;
+        Weapon _core = m_selectedItem.Core as Weapon;
         string _rlvl = _core == null ? "0" : _core.RequiredExpLevel.ToString();
         text_weapon_levelRequired.text = $"Required level: {_rlvl}";
 

@@ -23,7 +23,7 @@ public class LevelLoader : MonoBehaviour
         player.transform.position = levelData.Spawnpoint;
 
         //load eq
-        player.EquipmentSystem.SetActiveItem(lm.SO_ItemRegistry.Get(lm.SO_PlayerData.ActiveItem).Item);
+        player.EquipmentSystem.SetActiveItem(lm.SO_ItemRegistry.Get(lm.SO_PlayerData.ActiveItem).Core);
         foreach (string itemID in lm.SO_PlayerData.Equipment)
         {
             player.EquipmentSystem.AddItemToEquipment(lm.SO_ItemRegistry.Get(itemID));

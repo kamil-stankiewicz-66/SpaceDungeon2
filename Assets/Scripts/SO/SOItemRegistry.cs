@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SOItemRegistry", menuName = "ScriptableObjects/DataObjects/SOItemRegistry")]
@@ -20,5 +21,10 @@ public class SOItemRegistry : ScriptableObject
         }
 
         return null;
+    }
+
+    public SOItemData[] GetByType(EItemType type)
+    {
+        return registry.Where(item => item.ItemType == type).ToArray();
     }
 }

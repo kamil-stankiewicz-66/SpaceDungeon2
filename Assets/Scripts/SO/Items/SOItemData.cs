@@ -1,19 +1,21 @@
 using UnityEditor;
 using UnityEngine;
 
-public enum ItemType
+public enum EItemType
 {
-    Common, Gun, Melee
+    Common,
+    Gun, Melee,
+    Key
 }
 
 [CreateAssetMenu(fileName = "SOItemData", menuName = "ScriptableObjects/Items/SOItemData")]
 public class SOItemData : ScriptableObject
 {
     [SerializeField] string id;
-    [SerializeField] ItemType itemType;
+    [SerializeField] EItemType itemType;
     [SerializeField] string itemName;
     [SerializeField] Sprite icon;
-    [SerializeField] Item item;
+    [SerializeField] Item core;
     [SerializeField] int coinsValue;
 
 
@@ -21,15 +23,15 @@ public class SOItemData : ScriptableObject
 
     public string ID { get => id; }
 
-    public ItemType ItemType { get => itemType; }
+    public EItemType ItemType { get => itemType; }
 
     public string ItemName { get => itemName; }
 
     public Sprite Icon { get => icon; }
 
-    public Item Item { get => item; }
+    public Item Core { get => core; }
 
-    public GameObject Prefab { get => item.gameObject; }
+    public GameObject Prefab { get => core.gameObject; }
 
     public int CoinsValue { get => coinsValue; }
 

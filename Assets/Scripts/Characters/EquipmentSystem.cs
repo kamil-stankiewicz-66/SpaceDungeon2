@@ -14,7 +14,6 @@ public class EquipmentSystem : MonoBehaviour
     [SerializeField] Item activeItem;
     [SerializeField] List<ItemEntry> equipment;
     [SerializeField] int coins;
-    //[SerializeField] bool autoLoot;
 
 
     public Item ActiveItem
@@ -150,17 +149,19 @@ public class EquipmentSystem : MonoBehaviour
         ActiveItem = null;
     }
 
-    //public void SetActiveItemFromEquipment(Item item)
-    //{
-    //    RemoveItemFromEquipment(item);
-    //    SetActiveItem(item);
-    //}
+    public bool IsItemInEquipment(SOItemData item)
+    {
+        if (item == null)
+            return false;
 
-    //public void SetActiveItemFromEquipment(int index)
-    //{
-    //    ItemEntry itemEntry = equipment.Get(index);
-    //    SetActiveItemFromEquipment(itemEntry.item);
-    //}
+        foreach (var slot in equipment)
+        {
+            if (slot.item.ID == item.ID)
+                return true;
+        }
+
+        return false;
+    }
 
 
 
@@ -170,23 +171,5 @@ public class EquipmentSystem : MonoBehaviour
     {
         SetActiveItem(ActiveItem);
     }
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (!autoLoot)
-    //    {
-    //        return;
-    //    }
-
-    //    if (collision == null)
-    //    {
-    //        return;
-    //    }
-
-    //    if (collision.TryGetComponent(out Item item))
-    //    {
-    //        AddItemToEquipment(item);
-    //    }
-    //}
 
 }
