@@ -20,6 +20,7 @@ public class SOItemRegistry : ScriptableObject
                 return item;
         }
 
+        Debug.LogWarning($"ITEM_REGISTRY :: GET(id) :: item not found, id <{id}>");
         return null;
     }
 

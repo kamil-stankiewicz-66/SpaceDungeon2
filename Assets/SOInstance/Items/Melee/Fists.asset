@@ -16,5 +16,5 @@ MonoBehaviour:
   itemType: 2
   itemName: Fists
   icon: {fileID: 0}
-  item: {fileID: 5285435775110977188, guid: b63a68a4d87254b4d86733c1bad2b706, type: 3}
+  core: {fileID: 5285435775110977188, guid: b63a68a4d87254b4d86733c1bad2b706, type: 3}
   coinsValue: 0

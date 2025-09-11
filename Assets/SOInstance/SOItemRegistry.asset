@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   registry:
   - {fileID: 11400000, guid: 8f5eaac6e04f4ec47b1f7df69427d720, type: 2}
+  - {fileID: 11400000, guid: c72e01a46df0e5f4f92929f52e10fa83, type: 2}

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0255aceb890aae149b5a054d45b995d3, type: 3}
   m_Name: BlueKey
   m_EditorClassIdentifier: 
-  id: 
-  itemType: 0
-  itemName: 
+  id: 716c2207-28e4-4224-84f6-88352554abec
+  itemType: 3
+  itemName: Blue Key
   icon: {fileID: 0}
   core: {fileID: 0}
   coinsValue: 0

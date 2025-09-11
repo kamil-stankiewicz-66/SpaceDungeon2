@@ -59,6 +59,11 @@ public class EquipmentSystem : MonoBehaviour
             return;
         }
 
+        if (item == null)
+        {
+            Debug.LogWarning($"EQUIPMENT_SYSTEM :: ADD_ITEM_TO_EQ :: item is null");
+        }
+
 
         int index = equipment.FindIndex(e => e.item.ID == item.ID);
 
