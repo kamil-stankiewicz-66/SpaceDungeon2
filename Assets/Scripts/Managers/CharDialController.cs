@@ -48,6 +48,7 @@ public class CharDialController : MonoBehaviour
 
 
         //show dial
+        bool skip = false;
         int index = 0;
         while (true)
         {
@@ -62,12 +63,17 @@ public class CharDialController : MonoBehaviour
 
 
             //wait for ENTER
-            if (inputManager.SkipTrigger) 
+            if (inputManager.SkipTrigger && !skip)
             {
                 index++;
+                skip = true;
+            }
+            else if (!inputManager.SkipTrigger)
+            {
+                skip = false;
             }
 
-           
+
             yield return null;
         }
 

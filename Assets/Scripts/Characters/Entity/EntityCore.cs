@@ -39,6 +39,13 @@ public class EntityCore : Character
 
     private void Update()
     {
+        //disable ai if
+        if (!GameMarks.EntitiesAIEnable)
+        {
+            return;
+        }
+
+
         //seek
         if (m_state == EEntityState.Seek)
         {

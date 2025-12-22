@@ -42,6 +42,7 @@ public class CharDialPanel : MonoBehaviour
         }
         else
         {
+            profilePicHolder.enabled = true;
             profilePicHolder.sprite = profilePic;
         }
     }
