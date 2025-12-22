@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     InputAction interactAction;
     InputAction healAction;
     InputAction pauseAction;
+    InputAction skipAction;
 
 
     //getters
@@ -28,6 +29,8 @@ public class InputManager : MonoBehaviour
     public bool HealTrigger { get; private set; }
 
     public bool PauseTrigger { get; private set; }
+
+    public bool SkipTrigger { get; private set; }
 
 
     //enable and disable
@@ -47,6 +50,7 @@ public class InputManager : MonoBehaviour
         interactAction = InputSystem.actions.FindAction("Interact");
         healAction = InputSystem.actions.FindAction("Heal");
         pauseAction = InputSystem.actions.FindAction("Pause");
+        skipAction = InputSystem.actions.FindAction("Skip");
     }
 
 
@@ -54,6 +58,8 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        SkipTrigger = skipAction.IsPressed();
+
         if (GameMarks.PlayerInputEnable)
         {
             MoveAxis = moveAction.ReadValue<Vector2>();
