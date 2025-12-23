@@ -59,7 +59,7 @@ public class CharDialController : MonoBehaviour
 
 
             var entry = dialogSeq.Get()[index];
-            charDialStatement.Set(entry.message, entry.name, entry.profilePic);
+            charDialStatement.Set(entry.message, entry.profile.profileName, entry.profile.profilePic);
 
 
             //wait for ENTER

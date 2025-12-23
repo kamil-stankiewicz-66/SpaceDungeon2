@@ -1,4 +1,3 @@
-using PlasticGui.WorkspaceWindow;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SOCharDialSeq", menuName = "ScriptableObjects/Gameplay/SOCharacterDialogueSequence")]
@@ -7,8 +6,7 @@ public class SOCharDialSeq : ScriptableObject
     [System.Serializable] 
     public struct CharDialEntry
     {
-        public Sprite profilePic;
-        public string name;
+        public SOCharDialProfile profile;
         [TextArea(3, 10)] public string message;
     }
 

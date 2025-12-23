@@ -44,6 +44,9 @@ public class CharDialPanel : MonoBehaviour
         {
             profilePicHolder.enabled = true;
             profilePicHolder.sprite = profilePic;
+
+            Vector3 ratio = new Vector3(-1.0f * profilePic.textureRect.width / profilePic.textureRect.height, 1.0f);
+            profilePicHolder.transform.localScale = ratio;
         }
     }
 }
