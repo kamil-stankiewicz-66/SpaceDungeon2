@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742ded31330331848a514fb8f63f3fe9, type: 3}
+  m_Script: {fileID: 11500000, guid: 04731c6fb2bc58446825428f17d557e5, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: GameSource::SOCharDialProfile
   profilePic: {fileID: 2979346204372538417, guid: 686cef4afd5f9e348802e4c06f0449f4, type: 3}

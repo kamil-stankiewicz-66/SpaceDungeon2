@@ -7453,6 +7453,7 @@ Tilemap:
     e33: 1
 --- !u!483693784 &5363645996489917969
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7471,6 +7472,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7492,9 +7495,11 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -7502,7 +7507,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1 &1489543200227529250
 GameObject:
   m_ObjectHideFlags: 0
@@ -10284,6 +10288,7 @@ Tilemap:
     e33: 1
 --- !u!483693784 &4847444653394015301
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10302,6 +10307,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10323,9 +10330,11 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -10333,7 +10342,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!19719996 &8331299000360642989
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -13304,6 +13312,7 @@ Tilemap:
     e33: 1
 --- !u!483693784 &4817764888294908022
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -13322,6 +13331,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13343,9 +13354,11 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -13353,7 +13366,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1 &6592275746529837384
 GameObject:
   m_ObjectHideFlags: 0
@@ -14310,6 +14322,7 @@ Tilemap:
     e33: 1
 --- !u!483693784 &6122931800048951202
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -14328,6 +14341,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14349,9 +14364,11 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -14359,7 +14376,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1 &8734724347178727966
 GameObject:
   m_ObjectHideFlags: 0
@@ -14404,6 +14420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe6076f7d55fef4bb1c1a3b7fb208f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 8fe222d5-8d03-4f96-a4cd-1745af0a6f79
   levelData: {fileID: 5763229513648642693}
 --- !u!1001 &574594149604992007
 PrefabInstance:
@@ -14663,6 +14680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc
       objectReference: {fileID: 0}
+    - target: {fileID: 3974831057111623355, guid: 677a9bb281af8274ca629227ddd21700, type: 3}
+      propertyPath: ID
+      value: d7b552db-364e-4b02-a34b-6fb6a7519769
+      objectReference: {fileID: 0}
     - target: {fileID: 9095717954746028010, guid: 677a9bb281af8274ca629227ddd21700, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.396333
@@ -14725,6 +14746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 1240974436301078066, guid: 3e07b8a98a6ed0a4caa073df62d0bcaa, type: 3}
+      propertyPath: ID
+      value: f772a0ff-987d-4292-9647-ea2784780aa7
+      objectReference: {fileID: 0}
     - target: {fileID: 6353390692596930403, guid: 3e07b8a98a6ed0a4caa073df62d0bcaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.680618
@@ -14783,6 +14808,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6245613321100456876}
     m_Modifications:
+    - target: {fileID: 449161687666086458, guid: 7c0540bd8ecfa58428e3a0df0ada8556, type: 3}
+      propertyPath: ID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2189829794801079942, guid: 7c0540bd8ecfa58428e3a0df0ada8556, type: 3}
       propertyPath: m_Name
       value: Zombie Green
@@ -14845,6 +14874,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6245613321100456876}
     m_Modifications:
+    - target: {fileID: 449161687666086458, guid: 7c0540bd8ecfa58428e3a0df0ada8556, type: 3}
+      propertyPath: ID
+      value: 5e10b9c2-04a0-4b2e-a8ea-a5f97ffcc5b2
+      objectReference: {fileID: 0}
     - target: {fileID: 2189829794801079942, guid: 7c0540bd8ecfa58428e3a0df0ada8556, type: 3}
       propertyPath: m_Name
       value: Zombie Green (1)

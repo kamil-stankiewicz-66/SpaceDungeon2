@@ -1,5 +1,5 @@
 using UnityEngine;
-public abstract class StoryActivity : MonoBehaviour
+public abstract class StoryActivity : LevelObject
 {
     private QuestManager questManager;
     private bool isCompleted;

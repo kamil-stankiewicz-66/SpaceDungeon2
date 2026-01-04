@@ -82,10 +82,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7c060033b6cc14a90ed0b2ebaf0a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 14ffc6fc-9a03-4583-878f-6fcdfda288f3
   interactInfoBar: {fileID: 7960593390233923905}
-  interactionEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  interactionEvents: []
+  isSingleUse: 0
+  _state: 0
 --- !u!1 &7960593390233923905
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +292,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

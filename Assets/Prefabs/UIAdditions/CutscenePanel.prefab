@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1157405950358654798}
   - component: {fileID: 7798968945422978377}
   m_Layer: 0
-  m_Name: CharacterDialogueStatement
+  m_Name: CutscenePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,10 +71,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016722526467485997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5bbb6aee03c8744ac8cf58172d1341, type: 3}
+  m_Script: {fileID: 11500000, guid: 724cd0c534fac8f46af0f66b49c6fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterNameTMP: {fileID: 7121478223887070849}
+  profileNameTMP: {fileID: 7121478223887070849}
   messageTMP: {fileID: 2416104125986768351}
   profilePicHolder: {fileID: 8066654766297601339}
 --- !u!95 &7798968945422978377

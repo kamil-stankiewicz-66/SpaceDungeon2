@@ -2,20 +2,20 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class CharDialPanel : MonoBehaviour
+public class CutscenePanel : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI characterNameTMP, messageTMP;
+    [SerializeField] TextMeshProUGUI profileNameTMP, messageTMP;
     [SerializeField] Image profilePicHolder;
 
     private void OnEnable()
     {
-        if (characterNameTMP == null || messageTMP == null || profilePicHolder == null)
+        if (profileNameTMP == null || messageTMP == null || profilePicHolder == null)
         {
             Debug.LogWarning("CHARACTER_DIALOGUE_STATEMENT :: something is null, idk");
         }
     }
 
-    public void Set(string message, string characterName = null, Sprite profilePic = null)
+    public void Set(string message, string profileName = null, Sprite profilePic = null)
     {
         //message
 
@@ -24,13 +24,13 @@ public class CharDialPanel : MonoBehaviour
 
         //name
 
-        if (characterName == null)
+        if (profileName == null)
         {
-            characterName = "???";
+            profileName = "???";
         }
         else
         {
-            characterNameTMP.text = characterName;
+            profileNameTMP.text = profileName;
         }
 
 

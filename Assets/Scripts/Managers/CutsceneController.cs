@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class CharDialController : MonoBehaviour
+public class CutsceneController : MonoBehaviour
 {
-    [SerializeField] GameObject charDialPanelPrefab;
+    [SerializeField] GameObject cutscenePanelPrefab;
     InputManager inputManager;
 
 
@@ -13,7 +13,7 @@ public class CharDialController : MonoBehaviour
 
     private void Awake()
     {
-        if (charDialPanelPrefab == null) { Debug.LogWarning("CHAR_DIAL_CONTROLLER :: dial panel is null"); }
+        if (cutscenePanelPrefab == null) { Debug.LogWarning("CHAR_DIAL_CONTROLLER :: dial panel is null"); }
 
 
         inputManager = FindAnyObjectByType<InputManager>();
@@ -22,7 +22,7 @@ public class CharDialController : MonoBehaviour
     }
 
 
-    public void Call(SOCharDialSeq dialogSeq)
+    public void Call(SOCutsceneSeq dialogSeq)
     {
         if (!isRunning)
         {
@@ -31,20 +31,16 @@ public class CharDialController : MonoBehaviour
     }
 
 
-    IEnumerator CallProcess(SOCharDialSeq dialogSeq)
+    IEnumerator CallProcess(SOCutsceneSeq dialogSeq)
     {
         isRunning = true;
         GameMarks.SetAll(false);
 
 
-        //create window
-        GameObject charDialPanel = Instantiate(charDialPanelPrefab);
+        var cutscenePanelInstance = Instantiate(cutscenePanelPrefab);
+        CutscenePanel cutscenePanel = cutscenePanelInstance?.GetComponent<CutscenePanel>();
 
-
-        //get script
-        CharDialPanel charDialStatement = charDialPanel.GetComponent<CharDialPanel>();
-
-        if (charDialStatement == null) { Debug.LogWarning("CHAR_DIAL_CONTROLLER :: charDialStatement is null"); }
+        if (cutscenePanel == null) { Debug.LogWarning("CHAR_DIAL_CONTROLLER :: charDialStatement is null"); }
 
 
         //show dial
@@ -59,7 +55,7 @@ public class CharDialController : MonoBehaviour
 
 
             var entry = dialogSeq.Get()[index];
-            charDialStatement.Set(entry.message, entry.profile.profileName, entry.profile.profilePic);
+            cutscenePanel.Set(entry.message, entry.profile.profileName, entry.profile.profilePic);
 
 
             //wait for ENTER
@@ -79,7 +75,7 @@ public class CharDialController : MonoBehaviour
 
 
         //dispose
-        Destroy(charDialPanel);
+        Destroy(cutscenePanelInstance);
         GameMarks.SetAll(true);
         isRunning = false;
     }

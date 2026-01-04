@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System.Linq;
 
-public class ChestCore : MonoBehaviour
+public class ChestCore : LevelObject
 {
     [SerializeField] SOChestType SO_chestType;
     [SerializeField] int coinsInChest;

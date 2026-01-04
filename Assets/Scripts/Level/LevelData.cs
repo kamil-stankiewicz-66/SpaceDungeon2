@@ -236,7 +236,7 @@ public class LevelData : MonoBehaviour
     {
         get
         {
-            if (chests == null)
+            if (interactables == null)
                 return new InteractableObject[0];
 
             return interactables;

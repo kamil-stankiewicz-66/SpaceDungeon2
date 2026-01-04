@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CharacterDialogueTester : EditorWindow
 {
-    [SerializeField] CharDialController cdc;
-    [SerializeField] SOCharDialSeq dialSeq;
+    [SerializeField] CutsceneController cdc;
+    [SerializeField] SOCutsceneSeq dialSeq;
 
     [MenuItem("CustomEditors/CharacterDialogueTester")]
     public static void ShowWindow()
@@ -14,8 +14,8 @@ public class CharacterDialogueTester : EditorWindow
 
     private void OnGUI()
     {
-        cdc = EditorGUILayout.ObjectField("Controller:", cdc, typeof(CharDialController), true) as CharDialController;
-        dialSeq = EditorGUILayout.ObjectField("DialogSeq:", dialSeq, typeof(SOCharDialSeq), true) as SOCharDialSeq;
+        cdc = EditorGUILayout.ObjectField("Controller:", cdc, typeof(CutsceneController), true) as CutsceneController;
+        dialSeq = EditorGUILayout.ObjectField("DialogSeq:", dialSeq, typeof(SOCutsceneSeq), true) as SOCutsceneSeq;
 
         //button style
         GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);

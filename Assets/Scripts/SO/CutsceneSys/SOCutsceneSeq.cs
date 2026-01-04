@@ -1,17 +1,17 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SOCharDialSeq", menuName = "ScriptableObjects/Gameplay/SOCharacterDialogueSequence")]
-public class SOCharDialSeq : ScriptableObject
+public class SOCutsceneSeq : ScriptableObject
 {
     [System.Serializable] 
-    public struct CharDialEntry
+    public struct CutsceneStep
     {
-        public SOCharDialProfile profile;
+        public SOCutsceneProfile profile;
         [TextArea(3, 10)] public string message;
     }
 
-    [SerializeField] private CharDialEntry[] sequence;
+    [SerializeField] private CutsceneStep[] sequence;
 
 
-    public CharDialEntry[] Get() => sequence;
+    public CutsceneStep[] Get() => sequence;
 }

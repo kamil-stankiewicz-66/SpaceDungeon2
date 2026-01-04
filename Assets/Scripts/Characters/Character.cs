@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : LevelObject
 {
     public MovementSystem MovementSystem { get; private set; }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractableObject : MonoBehaviour
+public class InteractableObject : LevelObject
 {
     [SerializeField] GameObject interactInfoBar;
     [SerializeField] UnityEvent[] interactionEvents;
@@ -12,18 +12,34 @@ public class InteractableObject : MonoBehaviour
 
 
     //state
-    int _state = -1;
-    public int State 
-    {  
+    [HideInInspector] public const int STATE_DEFAULT = -1; 
+    [SerializeField] int _state = STATE_DEFAULT;
+    public int State
+    {
         get => _state;
         set
         {
             _state = value;
-
-            if (_state >= interactionEvents.Length)
-                _state = 0;
-
             InvokeInteraction(_state);
+        }
+    }
+
+    public void IncState()
+    {
+        if (State +1 >= interactionEvents.Length)
+        {
+            if (!isSingleUse)
+            {
+                State = 0;
+            }
+            else if (State +1 > interactionEvents.Length)
+            {
+                State = interactionEvents.Length;
+            }
+        }
+        else
+        {
+            State++;
         }
     }
 
@@ -102,8 +118,10 @@ public class InteractableObject : MonoBehaviour
 
 
         //call interaction
-        State++;        
-
+        if (IsInteractionAllowed())
+        {            
+            IncState();
+        }
 
         //bar
         interactInfoBar?.SetActive(IsInteractionAllowed());
@@ -115,15 +133,15 @@ public class InteractableObject : MonoBehaviour
 
     bool IsInteractionAllowed()
     {
-        return !isSingleUse || State == 0;
+        if (!isSingleUse)
+            return true;
+
+        return State < interactionEvents.Length;
     }
 
     void InvokeInteraction(int state)
     {
-        if (state < 0)
-            return;
-
-        if (interactionEvents.Length != 0)
+        if (state >= 0 && state < interactionEvents.Length)
             interactionEvents[State]?.Invoke();
     }
 }

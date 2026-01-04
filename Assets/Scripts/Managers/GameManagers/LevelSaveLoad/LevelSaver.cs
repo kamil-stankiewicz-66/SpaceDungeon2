@@ -159,13 +159,14 @@ public class LevelSaver : MonoBehaviour
                 isCompleted = storyActivity.IsCompleted
             };
 
-            string _path = PATH.GetDirectory(new string[] 
-            { 
+            string _path = PATH.GetDirectory(new string[]
+            {
                 PATH.LEVELS_FOLDER,
                 levelManager.ActiveLevelPointer.Item1.ToString(),
                 levelManager.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_STORYACTIVITY_FOLDER, 
-                i.ToString() 
+                //i.ToString()
+                storyActivity.ID
             });
             
             data.SaveBin(_path);
@@ -186,11 +187,11 @@ public class LevelSaver : MonoBehaviour
         //enemies
         for (ushort i = 0; i < levelManager.ActiveLevel.EnemiesCount; i++)
         {
-            EntityCore enemie = levelManager.ActiveLevel.Enemies[i];
-            Transform _t = enemie.gameObject.transform;
-            HealthSystem healthSystem = enemie.HealthSystem;
+            EntityCore enemy = levelManager.ActiveLevel.Enemies[i];
+            Transform _t = enemy.gameObject.transform;
+            HealthSystem healthSystem = enemy.HealthSystem;
 
-            if (enemie.IsRespawnedInMaxingMode)
+            if (enemy.IsRespawnedInMaxingMode)
             {
                 continue;
             }
@@ -202,13 +203,14 @@ public class LevelSaver : MonoBehaviour
                 health = healthSystem.Health
             };
 
-            string _path = PATH.GetDirectory(new string[] 
-            { 
+            string _path = PATH.GetDirectory(new string[]
+            {
                 PATH.LEVELS_FOLDER,
                 levelManager.ActiveLevelPointer.Item1.ToString(),
                 levelManager.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_ENEMIES_FOLDER, 
-                i.ToString() 
+                //i.ToString()
+                enemy.ID
             });
 
             data.SaveBin(_path);
@@ -240,7 +242,9 @@ public class LevelSaver : MonoBehaviour
                 PATH.LEVELS_FOLDER,
                 levelManager.ActiveLevelPointer.Item1.ToString(),
                 levelManager.ActiveLevelPointer.Item2.ToString(),
-                PATH.LEVELS_CHESTS_FOLDER, i.ToString() 
+                PATH.LEVELS_CHESTS_FOLDER,
+                //i.ToString()
+                chest.ID
             });
 
             data.SaveBin(_path);
@@ -272,7 +276,9 @@ public class LevelSaver : MonoBehaviour
                 PATH.LEVELS_FOLDER,
                 levelManager.ActiveLevelPointer.Item1.ToString(),
                 levelManager.ActiveLevelPointer.Item2.ToString(),
-                PATH.LEVELS_INTERACTABLES_FOLDER, i.ToString()
+                PATH.LEVELS_INTERACTABLES_FOLDER,
+                //i.ToString()
+                interactable.ID
             });
 
             data.SaveBin(_path);

@@ -75,7 +75,8 @@ public class LevelLoader : MonoBehaviour
                 lm.ActiveLevelPointer.Item1.ToString(),
                 lm.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_STORYACTIVITY_FOLDER,
-                i.ToString()
+                //i.ToString()
+                storyActivity.ID
             });
 
             //1
@@ -136,7 +137,8 @@ public class LevelLoader : MonoBehaviour
                 lm.ActiveLevelPointer.Item1.ToString(),
                 lm.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_ENEMIES_FOLDER,
-                i.ToString()
+                //i.ToString()
+                enemy.ID
             });
 
             switch (runMode)
@@ -185,7 +187,8 @@ public class LevelLoader : MonoBehaviour
                 lm.ActiveLevelPointer.Item1.ToString(),
                 lm.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_CHESTS_FOLDER,
-                i.ToString()
+                //i.ToString()
+                chest.ID
             });
 
             switch (runMode)
@@ -240,7 +243,8 @@ public class LevelLoader : MonoBehaviour
                 lm.ActiveLevelPointer.Item1.ToString(),
                 lm.ActiveLevelPointer.Item2.ToString(),
                 PATH.LEVELS_INTERACTABLES_FOLDER,
-                i.ToString()
+                //i.ToString()
+                interactable.ID
             });
 
             switch (runMode)
@@ -248,7 +252,7 @@ public class LevelLoader : MonoBehaviour
                 case EGameRunMode.Start:
                 case EGameRunMode.Maxing:
                 {
-                    interactable.State = -1;
+                    interactable.State = InteractableObject.STATE_DEFAULT;
                     break;
                 }
 
@@ -260,7 +264,7 @@ public class LevelLoader : MonoBehaviour
                     }
                     else
                     {
-                        interactable.State = -1;
+                        interactable.State = InteractableObject.STATE_DEFAULT;
                     }
 
                     break;

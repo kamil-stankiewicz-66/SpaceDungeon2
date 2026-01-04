@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49aec5e4e1165ca4d83204c3529dc21f, type: 3}
+  m_Script: {fileID: 11500000, guid: 56ebc0d6f7d41ed49874c1f80b8aec13, type: 3}
   m_Name: Dial_0_WalkingCorpses
   m_EditorClassIdentifier: GameSource::SOCharDialSeq
-  sequence:
-  - profile: {fileID: 11400000, guid: 7bb122ebfd805ca4697939471e2c11dc, type: 2}
-    message: They look like walking corpses.
+  sequence: []
