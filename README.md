@@ -4,6 +4,6 @@
 
 ## 🎥 Nagranie
 
-[GAMEPLAY](youtube.com/watch?v=KFh-yBdej-I)
+[GAMEPLAY](https://youtu.be/KFh-yBdej-I?si=cKqk-rdmimdAbaG-)
 
 ---
